@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 433657817}
   - component: {fileID: 433657820}
   - component: {fileID: 433657819}
-  - component: {fileID: 433657818}
   m_Layer: 5
   m_Name: TimePoint
   m_TagString: Untagged
@@ -209,20 +208,6 @@ RectTransform:
   m_AnchoredPosition: {x: 366, y: 32.5}
   m_SizeDelta: {x: 220, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &433657818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433657816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2fbbae6a44c8744a69406e5289eca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  min: 3
-  timeText: {fileID: 433657819}
 --- !u!114 &433657819
 MonoBehaviour:
   m_ObjectHideFlags: 0
