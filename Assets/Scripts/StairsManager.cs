@@ -11,7 +11,7 @@ public class StairsManager : MonoBehaviour
     public GameObject StairStep; //ステージのプレハブ
     public GameObject StairStepLast;
     // ノーツ数
-    public int steps = 340 - 16;
+    public int steps = 331 - 16;
     private int line;
     
     // ジャンプカウント
@@ -26,7 +26,7 @@ public class StairsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        line = steps / 8;
+        line = steps / 16 - 3;
         
     if (Input.GetKeyDown(KeyCode.Space))
             {

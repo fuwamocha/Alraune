@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StairSceneMove : MonoBehaviour
+public class GameClearMove : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class StairSceneMove : MonoBehaviour
     void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.gameObject.tag == "Player") {
-			SceneManager.LoadScene ("ClearScene");
+			SceneManager.LoadScene ("GameClear");
 		}
 	}
 }
