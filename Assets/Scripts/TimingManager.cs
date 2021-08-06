@@ -27,6 +27,10 @@ public class TimingManager : MonoBehaviour
             isStick = false;
         }
 
+        if (timing >= time170 * 1000f - 250f && timing < time170 * 1000f - 220f) {
+            playerManager.RythemAnim();
+        }
+
         /*
         if (Input.GetKeyDown("space") && !isJump) {
             playerManager.AutoJumpa();

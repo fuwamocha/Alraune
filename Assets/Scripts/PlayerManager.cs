@@ -81,6 +81,7 @@ public class PlayerManager : MonoBehaviour
         vector.x = xSpeed * 5f;
         vector.y = rb.velocity.y;
 
+        // デバッグ用 Pボタン
         if (pressP && HitGround()) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
         } else if (pressP && !HitGround()) {
@@ -103,6 +104,11 @@ public class PlayerManager : MonoBehaviour
     private bool HitGround()
     {
         return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
+    }
+
+    public void RythemAnim()
+    {
+        animator.SetTrigger("Rythem");
     }
 
     /*
