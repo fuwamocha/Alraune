@@ -2853,7 +2853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StairStep: {fileID: 4720703355742936633, guid: f9db832c723398641a2a6bff75240502, type: 3}
-  StairStepLast: {fileID: 4720703355742936633, guid: 96c1bdf5aabdb5648a8fc69b25779dc1, type: 3}
+  StairStepLast: {fileID: 4720703355742936633, guid: 8d7c4e8fee862444e86eff1eb57645fe, type: 3}
   steps: 324
 --- !u!1001 &1486989625
 PrefabInstance:
