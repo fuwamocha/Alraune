@@ -6,8 +6,8 @@ public class TimeCounter : MonoBehaviour
 {
    
     // 変数
-    public int min = 3;
-    private float sec;
+    public int min = 1;
+    public float sec = 57;
     private float totalTime;
 
     //時間表示
