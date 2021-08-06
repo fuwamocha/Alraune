@@ -12,7 +12,7 @@ public class portal : MonoBehaviour
         if (collision.tag == playerTag)
         {
             yield return new WaitForSeconds(1);
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("CountScene");
         }
     }
 }

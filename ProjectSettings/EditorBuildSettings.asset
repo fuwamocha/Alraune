@@ -12,13 +12,16 @@ EditorBuildSettings:
     path: Assets/Scenes/StageSelectScene.unity
     guid: e917827e51ba88749880903e27572d19
   - enabled: 1
+    path: Assets/Scenes/CountScene.unity
+    guid: e9866e7d568a32a459c489efbe2948f7
+  - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 8ae61d64c3dacdb48a12e9e734c06d6a
   - enabled: 1
-    path: Assets/Scenes/GameClear.unity
+    path: Assets/Scenes/gameclear.unity
     guid: 5d9e97f8b25c13542965496472900911
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/gameover.unity
     guid: 47e16a3d38561e34f9cae44443596e82
   - enabled: 1
     path: Assets/Scenes/Credit.unity
