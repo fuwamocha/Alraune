@@ -7,6 +7,7 @@ public class TimingManager : MonoBehaviour
     [SerializeField] GameObject stick = default;                // 生成・移動させるオブジェクト
     [SerializeField] PlayerManager playerManager = default;
     [SerializeField] AlrauneMovement alrauneMovement = default;
+    [SerializeField] bool isAutoJump = false;
 
     private float totalTime = 0f;
     private float timing = 0f;
@@ -26,10 +27,12 @@ public class TimingManager : MonoBehaviour
         }
 
         if (timing >= time170 * 1000f - 565f && timing < time170 * 1000f - 535f) {  // 140f～170f の誤差？
-
             if (autoJump) {
                 playerManager.AutoJump();
+            } else if (isAutoJump) {
+                playerManager.AutoJump();
             }
+
             alrauneMovement.CanJump();
 
 

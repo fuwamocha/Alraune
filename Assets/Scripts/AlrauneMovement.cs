@@ -33,7 +33,6 @@ public class AlrauneMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
         vector.y = rb.velocity.y;
         
         if (canJump && HitGround()) {
