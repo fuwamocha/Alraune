@@ -11,6 +11,7 @@ public class TimingManager : MonoBehaviour
     private float timing = 0f;
     private float time170 = 0.70588235f;
     private bool isStick = false;
+    private bool isRythem = false;
     private bool isJump = false;
 
     private void Update()
@@ -27,8 +28,11 @@ public class TimingManager : MonoBehaviour
             isStick = false;
         }
 
-        if (timing >= time170 * 1000f - 250f && timing < time170 * 1000f - 220f) {
+        if (timing >= time170 * 1000f - 250f && timing < time170 * 1000f - 220f && !isRythem) {
             playerManager.RythemAnim();
+            isRythem = true;
+        } else if (timing >= time170 * 1000f - 190f && isRythem) {
+            isRythem = false;
         }
 
         /*
