@@ -9,6 +9,7 @@ public class TimeCounter : MonoBehaviour
     public int min = 1;
     public float sec = 57;
     private float totalTime;
+    private bool isStart = false;
 
     //時間表示
     public Text timeText;
@@ -23,9 +24,13 @@ public class TimeCounter : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            isStart = true;
+
         // カウントダウン
         totalTime = min*60+sec; 
-        totalTime -= Time.deltaTime;
+        if (isStart&&totalTime>=0)
+            totalTime -= Time.deltaTime;
  
         // 分秒の更新
         min = (int)totalTime / 60;
