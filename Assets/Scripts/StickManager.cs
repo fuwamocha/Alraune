@@ -36,6 +36,8 @@ public class StickManager : MonoBehaviour
         perfectSTime = deathTime * 0.78f;
         perfectETime = deathTime * 0.82f;
 
+        sprRend.enabled = false;
+
         //Debug.Log(successTime);
         //Debug.Log(endTime);
     }
