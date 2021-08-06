@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameClearMove : MonoBehaviour
 {
+    public static bool isClear = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class GameClearMove : MonoBehaviour
     void OnTriggerEnter2D (Collider2D col)
 	{
 		if (col.gameObject.tag == "Player") {
+            isClear = true;
 			SceneManager.LoadScene ("GameClear");
 		}
 	}
