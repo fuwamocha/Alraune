@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
 
+    private int count = 0;
     private float xSpeed;
     private float xScale;
     private float jumpPower = 950f;
@@ -46,11 +47,13 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
 
+        /*
         // ジャンプ判定
         if (Input.GetKeyDown("space") && !autoJump) {
             StartCoroutine("AutoJump");
             autoJump = true;
         }
+        */
 
         // デバッグ用　のけぞり
         if (Input.GetKeyDown(KeyCode.U)) {
@@ -65,14 +68,6 @@ public class PlayerManager : MonoBehaviour
             transform.localScale = new Vector2(xSpeed * 1.25f, 1.25f);
         }
 
-        /*
-        // ジャンプ処理
-        if (pressJump && HitGround()) {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
-            pressJump = false;
-        }
-        */
-
         // 移動処理
         vector.x = xSpeed * 5f;
         vector.y = rb.velocity.y;
@@ -80,6 +75,7 @@ public class PlayerManager : MonoBehaviour
         // オートジャンプ処理
         if (autoJump) {
             if (canJump && HitGround()) {
+                count++;
                 rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
             } else if (canJump && !HitGround()) {
                 canJump = false;
@@ -89,6 +85,11 @@ public class PlayerManager : MonoBehaviour
             if (isJump && HitGround()) {
                 xSpeed = 0f;
                 isJump = false;
+                autoJump = false;
+                if (count == 4) {
+                    transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
+                    count = 0;
+                }
             } else if (isJump) {
                 xSpeed = Mathf.Sign(transform.localScale.x);
                 vector.x = xSpeed * 7.6f;
@@ -111,37 +112,9 @@ public class PlayerManager : MonoBehaviour
         animator.SetTrigger("Rythem");
     }
 
-    /*
-    IEnumerator AutoJumpStart()
+    public void AutoJump()
     {
-        for (int i = 0; i < 3; i++) {
-            canJump = true;
-            if (i == 2) {
-                yield return new WaitForSeconds(time2);
-                transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-                yield return new WaitForSeconds(time3);
-                break;
-            }
-            yield return new WaitForSeconds(waitTime);
-        }
-
-        StartCoroutine("AutoJump");
-    }
-    */
-
-    IEnumerator AutoJump()
-    {
-        for (int i = 0; i < 4; i++) {
-            canJump = true;
-            if (i == 3) {
-                yield return new WaitForSeconds(time2);
-                transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-                yield return new WaitForSeconds(time3);
-                break;
-            }
-            yield return new WaitForSeconds(waitTime);
-        }
-
-        StartCoroutine("AutoJump");
+        canJump = true;
+        autoJump = true;
     }
 }
