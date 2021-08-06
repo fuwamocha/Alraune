@@ -31,14 +31,16 @@ public class PlayerManager : MonoBehaviour
         xSpeed = Input.GetAxisRaw("Horizontal");
         xScale = Mathf.Sign(transform.localScale.x);
 
-        Debug.DrawLine(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, Color.red);
+        //Debug.DrawLine(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, Color.red);
 
+        /*
         // ジャンプ判定
         if (Input.GetKeyDown("space")) {
             pressJump = true;
         } else if (Input.GetKeyUp("space")) {
             pressJump = false;
         }
+        */
 
         // アニメーション遷移
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
@@ -48,9 +50,10 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
 
-        // デバッグ用　オートジャンプ
-        if (Input.GetKeyDown(KeyCode.P)) {
+        // ジャンプ判定
+        if (Input.GetKeyDown("space") && !pressJump) {
             StartCoroutine("AutoJump");
+            pressJump = true;
         }
 
         // デバッグ用　のけぞり
@@ -102,10 +105,12 @@ public class PlayerManager : MonoBehaviour
         return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
     }
 
+    /*
     public void AutoJumpa()
     {
         StartCoroutine("AutoJump");
     }
+    */
 
     IEnumerator AutoJump()
     {
@@ -121,6 +126,8 @@ public class PlayerManager : MonoBehaviour
             }
             yield return new WaitForSeconds(time);
         }
+
+        pressJump = false;
 
         /*
         time = 0.70588235294f;
