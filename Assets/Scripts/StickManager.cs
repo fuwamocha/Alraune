@@ -7,6 +7,9 @@ public class StickManager : MonoBehaviour
     [SerializeField] Sprite stick = default;
     [SerializeField] Sprite stickBig = default;
 
+    public static bool isPerfect = false;
+    public static bool isSuccess = false;
+
     private float speed;
     private float time170 = 0.70588235f;
     private float totalTime = 0f;
@@ -55,14 +58,19 @@ public class StickManager : MonoBehaviour
 
         if (Input.GetKeyDown("space")){
             if (totalTime >= perfectSTime && totalTime <= perfectETime) {
+                isPerfect = true;
                 Debug.Log("NICE!!");
+                
             } else if (totalTime >= successTime) {
                 Debug.Log("OK!");
+                isSuccess = true;
             } else if (totalTime >= startTime) {
                 Debug.Log("MISS");
             } else {
                 return;
             }
+            isPerfect = false;
+            isSuccess = false;
 
             Destroy(gameObject);
         }
