@@ -13,12 +13,21 @@ public class TimingManager : MonoBehaviour
     private bool isStick = false;
     private bool isRythem = false;
 
+    private bool autoJump = false;
+
     private void Update()
     {
         totalTime += Time.deltaTime * 1000f;        // トータル経過時間(ms)
         timing = totalTime % (time170 * 1000f);     // 1回毎の経過時間(ms)
 
+        if (Input.GetKeyDown("space") && !autoJump) {
+            autoJump = true;
+        }
+
         if (timing >= time170 * 1000f - 565f && timing < time170 * 1000f - 535f) {  // 140f～170f の誤差？
+            if (autoJump) {
+                playerManager.AutoJump();
+            }
             if (!isStick) {
                 Instantiate(stick, transform);
                 isStick = true;
