@@ -62,8 +62,6 @@ public class StickManager : MonoBehaviour
                 return;
             }
 
-            //Debug.Log(totalTime);
-
             Destroy(gameObject);
         }
     }
