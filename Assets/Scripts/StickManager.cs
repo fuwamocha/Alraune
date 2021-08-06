@@ -34,8 +34,8 @@ public class StickManager : MonoBehaviour
         speed = 6000f / deathTime;
 
         startTime = deathTime * 0.65f;
-        endTime = deathTime * 0.88f;
-        successTime = deathTime * 0.72f;
+        endTime = deathTime * 0.86f;
+        successTime = deathTime * 0.74f;
         perfectSTime = deathTime * 0.78f;
         perfectETime = deathTime * 0.82f;
 
