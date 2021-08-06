@@ -10,9 +10,6 @@ public class PlayerManager : MonoBehaviour
     private float xSpeed;
     private float xScale;
     private float jumpPower = 950f;
-    private float waitTime;
-    private float time2;
-    private float time3;
     private bool isJump = false;
     private bool canJump = false;
     private bool autoJump = false;
@@ -21,15 +18,10 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 vector;
 
-
     private void Start()
     {
         rb       = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        waitTime = 0.70588235294f;
-        time2 = 0.35f;
-        time3 = waitTime - time2;
     }
 
     private void Update()
@@ -46,14 +38,6 @@ public class PlayerManager : MonoBehaviour
         } else if (!HitGround() && !animator.GetBool("Jump")) {
             animator.SetBool("Jump", true);
         }
-
-        /*
-        // ジャンプ判定
-        if (Input.GetKeyDown("space") && !autoJump) {
-            StartCoroutine("AutoJump");
-            autoJump = true;
-        }
-        */
 
         // デバッグ用　のけぞり
         if (Input.GetKeyDown(KeyCode.U)) {
@@ -86,9 +70,8 @@ public class PlayerManager : MonoBehaviour
                 xSpeed = 0f;
                 isJump = false;
                 autoJump = false;
-                if (count == 4) {
+                if (count % 4 == 0) {
                     transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-                    count = 0;
                 }
             } else if (isJump) {
                 xSpeed = Mathf.Sign(transform.localScale.x);

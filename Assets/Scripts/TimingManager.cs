@@ -6,14 +6,15 @@ public class TimingManager : MonoBehaviour
 {
     [SerializeField] GameObject stick = default;    // 生成・移動させるオブジェクト
     [SerializeField] PlayerManager playerManager = default;
+    [SerializeField] 
 
     private float totalTime = 0f;
     private float timing = 0f;
     private float time170 = 0.70588235f;
-    private bool isStick = false;
     private bool isRythem = false;
-
     private bool autoJump = false;
+
+    private bool isStick = false;
 
     private void Update()
     {
