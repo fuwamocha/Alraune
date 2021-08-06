@@ -4659,6 +4659,10 @@ PrefabInstance:
       value: Timing
       objectReference: {fileID: 0}
     - target: {fileID: 3617735559777305277, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
+      propertyPath: isAutoJump
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3617735559777305277, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1635378291}
