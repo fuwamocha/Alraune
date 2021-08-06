@@ -7,11 +7,12 @@ public class portal : MonoBehaviour
 {
     private string playerTag = "Player";
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private IEnumerator OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == playerTag)
         {
-            SceneManager.LoadScene("MainScene");
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

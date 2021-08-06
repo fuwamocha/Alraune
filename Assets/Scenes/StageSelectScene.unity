@@ -221,12 +221,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5, y: 0}
+  m_Offset: {x: -0.31032348, y: 0.041491747}
   serializedVersion: 2
-  m_Radius: 0.14183946
+  m_Radius: 0.29002404
 --- !u!212 &84152422
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -801,8 +801,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1401698393}
   - component: {fileID: 1401698396}
-  - component: {fileID: 1401698395}
   - component: {fileID: 1401698394}
+  - component: {fileID: 1401698395}
   m_Layer: 0
   m_Name: audio
   m_TagString: Untagged
@@ -859,9 +859,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1401698392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a08a18566377546abbf8ffddafdaa4, type: 3}
+  m_Script: {fileID: 11500000, guid: df012651c8838cb439c6da1f51e77ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: c8024b51217afbc41900b346d863e763, type: 3}
 --- !u!82 &1401698396
 AudioSource:
   m_ObjectHideFlags: 0

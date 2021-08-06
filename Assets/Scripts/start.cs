@@ -8,6 +8,6 @@ public class start : MonoBehaviour
     //　スタートボタンを押したら実行する
     public void StartGame()
     {
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("StageSelectScene");
     }
 }
