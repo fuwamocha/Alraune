@@ -251,6 +251,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8937336300203828999, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828999, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: gravity
+      value: -0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829000, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_SortingOrder
       value: 3
@@ -261,11 +269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.03
+      value: -5.33
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.31
+      value: -2.15
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -303,7 +311,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alraune
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
 --- !u!1 &408417739
 GameObject:
