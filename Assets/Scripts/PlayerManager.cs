@@ -8,7 +8,7 @@ public class PlayerManager : MonoBehaviour
 
     private float xSpeed;
     private float xScale;
-    private float jumpPower = 900f;
+    private float jumpPower = 950f;
     private float time;
     private bool pressJump = false;
     private Animator animator;
@@ -33,14 +33,14 @@ public class PlayerManager : MonoBehaviour
 
         Debug.DrawLine(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, Color.red);
 
-        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
+        // ƒWƒƒƒ“ƒv”»’è
         if (Input.GetKeyDown("space")) {
             pressJump = true;
         } else if (Input.GetKeyUp("space")) {
             pressJump = false;
         }
 
-        // ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½
+        // ƒAƒjƒ[ƒVƒ‡ƒ“‘JˆÚ
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
         if (HitGround() && animator.GetBool("Jump")) {
             animator.SetBool("Jump", false);
@@ -48,11 +48,12 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
 
-
+        // ƒfƒoƒbƒO—p@ƒI[ƒgƒWƒƒƒ“ƒv
         if (Input.GetKeyDown(KeyCode.P)) {
             StartCoroutine("AutoJump");
         }
 
+        // ƒfƒoƒbƒO—p@‚Ì‚¯‚¼‚è
         if (Input.GetKeyDown(KeyCode.U)) {
             animator.SetTrigger("Miss");
         }
@@ -60,23 +61,23 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½
+        // ƒvƒŒƒCƒ„[‚ÌŒü‚«
         if (xSpeed != 0) {
             transform.localScale = new Vector2(xSpeed * 1.25f, 1.25f);
         }
 
-        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
+        /*
+        // ƒWƒƒƒ“ƒvˆ—
         if (pressJump && HitGround()) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
             pressJump = false;
         }
+        */
 
-        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ˆÚ“®ˆ—
         vector.x = xSpeed * 5f;
         vector.y = rb.velocity.y;
 
-
-        /**/
         if (pressP && HitGround()) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
         } else if (pressP && !HitGround()) {
@@ -89,28 +90,26 @@ public class PlayerManager : MonoBehaviour
             isJump = false;
         } else if (isJump) {
             xSpeed = Mathf.Sign(transform.localScale.x);
-            vector.x = xSpeed * 9.4f;
+            vector.x = xSpeed * 7.6f;
         }
 
-        // 7.35f * 1000f
-        /**/
-
-
-        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
+        // ˆÚ“®ˆ—
         rb.velocity = vector;
     }
 
     private bool HitGround()
     {
-        //Debug.DrawLine(transform.position - (transform.right * 0.87f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.20f * xScale) - transform.up * 1.95f, Color.red);
-        //Debug.DrawLine(transform.position + (transform.right * 0.47f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.20f * xScale) - transform.up * 1.95f, Color.red);
+        return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
+    }
 
-        return Physics2D.Linecast(transform.position - transform.up * 1.85f, transform.position - transform.up * 1.95f, groundLayer);
+    public void AutoJumpa()
+    {
+        StartCoroutine("AutoJump");
     }
 
     IEnumerator AutoJump()
     {
-        time = 120f / 170f;
+        time = 0.70588235294f;
         for (int i = 0; i < 4; i++) {
             pressP = true;
             if (i == 3) {
@@ -118,12 +117,13 @@ public class PlayerManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
 
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-                time = 120f / 170f - 0.35f;
+                time = 0.70588235294f - 0.35f;
             }
             yield return new WaitForSeconds(time);
         }
 
-        time = 120f / 170f;
+        /*
+        time = 0.70588235294f;
         for (int i = 0; i < 4; i++) {
             pressP = true;
             if (i == 3) {
@@ -131,13 +131,12 @@ public class PlayerManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
 
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-
-                time = 120f / 170f - 0.35f;
+                time = 0.70588235294f - 0.35f;
             }
             yield return new WaitForSeconds(time);
         }
 
-        time = 120f / 170f;
+        time = 0.70588235294f;
         for (int i = 0; i < 4; i++) {
             pressP = true;
             if (i == 3) {
@@ -145,13 +144,12 @@ public class PlayerManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
 
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-
-                time = 120f / 170f - 0.35f;
+                time = 0.70588235294f - 0.35f;
             }
             yield return new WaitForSeconds(time);
         }
 
-        time = 120f / 170f;
+        time = 0.70588235294f;
         for (int i = 0; i < 4; i++) {
             pressP = true;
             if (i == 3) {
@@ -159,13 +157,12 @@ public class PlayerManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
 
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-
-                time = 120f / 170f - 0.35f;
+                time = 0.70588235294f - 0.35f;
             }
             yield return new WaitForSeconds(time);
         }
 
-        time = 120f / 170f;
+        time = 0.70588235294f;
         for (int i = 0; i < 4; i++) {
             pressP = true;
             if (i == 3) {
@@ -173,11 +170,11 @@ public class PlayerManager : MonoBehaviour
                 yield return new WaitForSeconds(time);
 
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-
-                time = 120f / 170f - 0.35f;
+                time = 0.70588235294f - 0.35f;
             }
             yield return new WaitForSeconds(time);
         }
+        */
 
     }
 }
