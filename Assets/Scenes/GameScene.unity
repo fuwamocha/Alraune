@@ -4482,5 +4482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2fbbae6a44c8744a69406e5289eca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min: 3
+  min: 1
+  sec: 57
   timeText: {fileID: 1926512391}
