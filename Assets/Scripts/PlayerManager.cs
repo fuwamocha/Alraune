@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     private bool isJump = false;
     private bool canJump = false;
     private bool autoJump = false;
+
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 vector;
@@ -47,7 +48,7 @@ public class PlayerManager : MonoBehaviour
 
         // ジャンプ判定
         if (Input.GetKeyDown("space") && !autoJump) {
-            StartCoroutine("AutoJumpStart");
+            StartCoroutine("AutoJump");
             autoJump = true;
         }
 
@@ -55,8 +56,6 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U)) {
             animator.SetTrigger("Miss");
         }
-
-
     }
 
     private void FixedUpdate()
@@ -100,16 +99,19 @@ public class PlayerManager : MonoBehaviour
         rb.velocity = vector;
     }
 
+    // 接地判定
     private bool HitGround()
     {
         return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
     }
 
+    // アニメーション遷移
     public void RythemAnim()
     {
         animator.SetTrigger("Rythem");
     }
 
+    /*
     IEnumerator AutoJumpStart()
     {
         for (int i = 0; i < 3; i++) {
@@ -125,6 +127,7 @@ public class PlayerManager : MonoBehaviour
 
         StartCoroutine("AutoJump");
     }
+    */
 
     IEnumerator AutoJump()
     {

@@ -12,7 +12,6 @@ public class TimingManager : MonoBehaviour
     private float time170 = 0.70588235f;
     private bool isStick = false;
     private bool isRythem = false;
-    private bool isJump = false;
 
     private void Update()
     {
@@ -34,13 +33,6 @@ public class TimingManager : MonoBehaviour
         } else if (timing >= time170 * 1000f - 190f && isRythem) {
             isRythem = false;
         }
-
-        /*
-        if (Input.GetKeyDown("space") && !isJump) {
-            playerManager.AutoJumpa();
-            isJump = true;
-        }
-        */
     }
 
     
