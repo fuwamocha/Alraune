@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class close : MonoBehaviour
 {
-    public void SceneTitle()
+    public void OnClick()
     {
         SceneManager.LoadScene("title");
     }
