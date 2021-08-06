@@ -30,8 +30,7 @@ public class TimingManager : MonoBehaviour
             if (autoJump) {
                 playerManager.AutoJump();
             }
-
-
+            alrauneMovement.CanJump();
 
 
             if (!isStick) {

@@ -205,6 +205,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8937336299418718563, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Size.x
+      value: 0.866132
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336299418718563, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.49646246
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336299418718564, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828994, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828996, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: a7befc4bd82c4d94b9ca83f101c9b302, type: 2}
+    - target: {fileID: 8937336300203828996, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_GravityScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828996, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1241999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Size.y
+      value: 0.33622265
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.03883362
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.2533171
+      objectReference: {fileID: 0}
     - target: {fileID: 8937336300203828999, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: speed
       value: 0.5
@@ -227,11 +271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.33
+      value: -5.35
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.15
+      value: -2.29
       objectReference: {fileID: 0}
     - target: {fileID: 8937336300203829001, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
       propertyPath: m_LocalPosition.z
@@ -269,8 +313,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alraune
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8937336300203828998, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c12a19dc2e8b2c47a4e5d3bf95ab410, type: 3}
 --- !u!1 &307763802 stripped
 GameObject:
@@ -291,7 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &408417739
 GameObject:
   m_ObjectHideFlags: 0
@@ -4619,5 +4662,9 @@ PrefabInstance:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 1635378291}
+    - target: {fileID: 3617735559777305277, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
+      propertyPath: alrauneMovement
+      value: 
+      objectReference: {fileID: 307763803}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
