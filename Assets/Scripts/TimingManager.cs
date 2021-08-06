@@ -31,7 +31,7 @@ public class TimingManager : MonoBehaviour
         if (timing >= time170 * 1000f - 250f && timing < time170 * 1000f - 220f && !isRythem) {
             playerManager.RythemAnim();
             isRythem = true;
-        } else if (timing >= time170 * 1000f - 300f && isRythem) {
+        } else if (timing >= time170 * 1000f - 190f && isRythem) {
             isRythem = false;
         }
 
