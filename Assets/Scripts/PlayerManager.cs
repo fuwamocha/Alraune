@@ -25,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         rb       = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         audioSource   = GetComponent<AudioSource>();
+        audioSource.clip = shan;
     }
 
     private void Update()
@@ -108,6 +109,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Shan()
     {
-        audioSource.PlayOneShot(shan);
+        audioSource.Play();
     }
 }

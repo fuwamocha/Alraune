@@ -8,7 +8,8 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] private int perfectScore = 1000;
     [SerializeField] private int successScore = 500;
 
-    
+    [SerializeField] PlayerManager playerManager = default;
+
     private int totalScore = 0;
     
     public Text scoreText;
@@ -23,10 +24,10 @@ public class ScoreCounter : MonoBehaviour
     void Update()
     {
         if (StickManager.isPerfect) {
+            playerManager.Shan();           //
             totalScore += perfectScore;
             StickManager.isPerfect = false;
         }
-
 
         if (StickManager.isSuccess) {
             totalScore += successScore;

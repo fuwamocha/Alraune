@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Timing2Manager : MonoBehaviour
 {
-    [SerializeField] PlayerManager playerManager = default;
     [SerializeField] AlrauneMovement alrauneMovement = default;
 
     private int count = 0;
@@ -18,10 +17,6 @@ public class Timing2Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StickManager.isPerfect) {
-            playerManager.Shan();
-        }
-
         if (StickManager.isMiss) {
             count++;
             if (count % 4 == 0) { alrauneMovement.Warp(); }

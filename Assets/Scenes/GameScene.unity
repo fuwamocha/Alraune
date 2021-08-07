@@ -4622,6 +4622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perfectScore: 1000
   successScore: 500
+  playerManager: {fileID: 1635378291}
   scoreText: {fileID: 1973729803}
 --- !u!1 &1980186881
 GameObject:
@@ -4652,7 +4653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ad3ad185161514b917e0c84bdc57fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerManager: {fileID: 1635378291}
   alrauneMovement: {fileID: 307763803}
 --- !u!4 &1980186883
 Transform:
