@@ -86,6 +86,14 @@ public class AlrauneMovement : MonoBehaviour
 
         transform.position = new Vector2(x, y);
 
+        if (count % 4 == 0) {
+            transform.localScale = new Vector2(transform.localScale.x * -1f, 1f);
+        }
+
+        if (count % 4 == 1 && isJump) {
+            transform.localScale = new Vector2(transform.localScale.x * -1f, 1f);
+        }
+
         canJump = false;
         isJump = false;
 
@@ -93,9 +101,7 @@ public class AlrauneMovement : MonoBehaviour
         vector.y = 0f;
         rb.velocity = vector;
 
-        if (count % 4 == 0) {
-            transform.localScale = new Vector2(transform.localScale.x * -1f, 1f);
-        }
+
     }
 
     public void CanJump()
