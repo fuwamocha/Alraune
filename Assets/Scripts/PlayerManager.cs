@@ -109,6 +109,6 @@ public class PlayerManager : MonoBehaviour
 
     public void Shan()
     {
-        audioSource.Play();
+        //audioSource.Play();
     }
 }

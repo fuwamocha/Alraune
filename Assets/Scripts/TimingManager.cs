@@ -44,10 +44,10 @@ public class TimingManager : MonoBehaviour
             isStick = false;
         }
 
-        if (timing >= time170 * 1000f - 250f && timing < time170 * 1000f - 220f && !isRythem) {
+        if (timing >= time170 * 1000f - 150f && timing < time170 * 1000f - 120f && !isRythem) {
             playerManager.RythemAnim();
             isRythem = true;
-        } else if (timing >= time170 * 1000f - 190f && isRythem) {
+        } else if (timing >= time170 * 1000f - 90f && isRythem) {
             isRythem = false;
         }
     }
