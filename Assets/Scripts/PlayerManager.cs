@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
+    [SerializeField] AudioClip shan = default;
 
     private int count = 0;
     private float xSpeed;
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     private bool autoJump = false;
 
     private Animator animator;
+    private AudioSource audioSource;
     private Rigidbody2D rb;
     private Vector2 vector;
 
@@ -22,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     {
         rb       = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        audioSource   = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -101,5 +104,10 @@ public class PlayerManager : MonoBehaviour
     {
         canJump = true;
         autoJump = true;
+    }
+
+    public void Shan()
+    {
+        audioSource.PlayOneShot(shan);
     }
 }
