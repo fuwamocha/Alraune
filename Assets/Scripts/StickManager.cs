@@ -34,11 +34,11 @@ public class StickManager : MonoBehaviour
         deathTime = time170 * 2500f;
         speed = 6000f / deathTime;
 
-        startTime = deathTime * 0.65f;
-        endTime = deathTime * 0.87f;
-        successTime = deathTime * 0.75f;
-        perfectSTime = deathTime * 0.79f;
-        perfectETime = deathTime * 0.83f;
+        startTime = deathTime * 0.55f;
+        endTime = deathTime * 0.77f;
+        successTime = deathTime * 0.65f;
+        perfectSTime = deathTime * 0.69f;
+        perfectETime = deathTime * 0.73f;
 
         sprRend.enabled = false;
 

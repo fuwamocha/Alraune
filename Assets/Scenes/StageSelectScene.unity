@@ -1876,6 +1876,10 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 0.7651845
       objectReference: {fileID: 0}
+    - target: {fileID: 2110396983087737364, guid: 35905a5d0362653449da551c2ff30f23, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35905a5d0362653449da551c2ff30f23, type: 3}
 --- !u!114 &899646206 stripped
@@ -2319,7 +2323,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0005b03246faa7641ad5b5198a1b5b74, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.104
   m_Pitch: 1
   Loop: 1
   Mute: 0
