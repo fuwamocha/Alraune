@@ -9,6 +9,7 @@ public class StickManager : MonoBehaviour
 
     public static bool isPerfect = false;
     public static bool isSuccess = false;
+    public static bool isMiss = false;
 
     private float speed;
     private float time170 = 0.70588235f;
@@ -51,6 +52,7 @@ public class StickManager : MonoBehaviour
 
         if (totalTime > endTime) {
             Debug.Log("MISS");
+            isMiss = true;
             Destroy(gameObject);
         } else if (totalTime >= successTime) {
             sprRend.sprite = stickBig;
@@ -65,6 +67,7 @@ public class StickManager : MonoBehaviour
                 isSuccess = true;
                 Debug.Log("OK!");
             } else if (totalTime >= startTime) {
+                isMiss = true;
                 Debug.Log("MISS");
             } else {
                 return;

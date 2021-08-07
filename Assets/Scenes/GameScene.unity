@@ -4653,6 +4653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 1635378291}
+  alrauneMovement: {fileID: 307763803}
 --- !u!4 &1980186883
 Transform:
   m_ObjectHideFlags: 0

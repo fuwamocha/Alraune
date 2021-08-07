@@ -5,6 +5,9 @@ using UnityEngine;
 public class Timing2Manager : MonoBehaviour
 {
     [SerializeField] PlayerManager playerManager = default;
+    [SerializeField] AlrauneMovement alrauneMovement = default;
+
+    private int count = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,10 @@ public class Timing2Manager : MonoBehaviour
             playerManager.Shan();
         }
 
-
-
-        if (StickManager.isSuccess) {
-            //Debug.Log("bbb");
+        if (StickManager.isMiss) {
+            count++;
+            if (count % 4 == 0) { alrauneMovement.Warp(); }
+            StickManager.isMiss = false;
         }
     }
 }

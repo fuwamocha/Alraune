@@ -65,7 +65,7 @@ public class AlrauneMovement : MonoBehaviour
         return Physics2D.Linecast(transform.position - transform.right * 0.18f - transform.up * 1.4f, transform.position - transform.right * 0.18f - transform.up * 1.5f, groundLayer);
     }
 
-    private void Warp()
+    public void Warp()
     {
         count++;
 
