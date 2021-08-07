@@ -7,6 +7,7 @@ public class ScoreShower : MonoBehaviour
 {
     private int resultScore;
     public Text scoreText;
+    
     // Start is called before the first frame update
     void Start()
     {
