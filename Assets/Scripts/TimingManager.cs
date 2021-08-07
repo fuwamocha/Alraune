@@ -26,7 +26,7 @@ public class TimingManager : MonoBehaviour
             autoJump = true;
         }
 
-        if (timing >= time170 * 1000f - 475f && timing < time170 * 1000f - 445f) {
+        if (timing >= time170 * 1000f - 535f && timing < time170 * 1000f - 505f) {
             if (autoJump) {
                 playerManager.AutoJump();
             } else if (isAutoJump) {
@@ -44,10 +44,10 @@ public class TimingManager : MonoBehaviour
             isStick = false;
         }
 
-        if (timing >= time170 * 1000f - 150f && timing < time170 * 1000f - 120f && !isRythem) {
+        if (timing >= time170 * 1000f - 210f && timing < time170 * 1000f - 180f && !isRythem) {
             playerManager.RythemAnim();
             isRythem = true;
-        } else if (timing >= time170 * 1000f - 90f && isRythem) {
+        } else if (timing >= time170 * 1000f - 150f && isRythem) {
             isRythem = false;
         }
     }
