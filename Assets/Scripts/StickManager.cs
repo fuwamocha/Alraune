@@ -62,8 +62,8 @@ public class StickManager : MonoBehaviour
                 Debug.Log("NICE!!");
                 
             } else if (totalTime >= successTime) {
-                Debug.Log("OK!");
                 isSuccess = true;
+                Debug.Log("OK!");
             } else if (totalTime >= startTime) {
                 Debug.Log("MISS");
             } else {

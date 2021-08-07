@@ -22,13 +22,17 @@ public class ScoreCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(StickManager.isPerfect)
+        if (StickManager.isPerfect) {
             totalScore += perfectScore;
             StickManager.isPerfect = false;
-        
-        if(StickManager.isSuccess)
+        }
+
+
+        if (StickManager.isSuccess) {
             totalScore += successScore;
             StickManager.isSuccess = false;
+        }
+
         
        scoreText.text = totalScore.ToString("000000");
 
