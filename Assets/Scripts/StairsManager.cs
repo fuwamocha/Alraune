@@ -5,7 +5,6 @@ using UnityEngine;
 public class StairsManager : MonoBehaviour
 {
 
-    float StageSize = 0.8f;
     int StageIndex;
 
     public GameObject StairStep; //ステージのプレハブ

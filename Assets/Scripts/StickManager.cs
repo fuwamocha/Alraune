@@ -69,8 +69,6 @@ public class StickManager : MonoBehaviour
             } else {
                 return;
             }
-            isPerfect = false;
-            isSuccess = false;
 
             Destroy(gameObject);
         }

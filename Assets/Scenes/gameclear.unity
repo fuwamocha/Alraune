@@ -838,7 +838,6 @@ GameObject:
   - component: {fileID: 1527710137}
   - component: {fileID: 1527710140}
   - component: {fileID: 1527710139}
-  - component: {fileID: 1527710138}
   m_Layer: 5
   m_Name: TimePoint
   m_TagString: Untagged
@@ -865,21 +864,6 @@ RectTransform:
   m_AnchoredPosition: {x: 366, y: 32.5}
   m_SizeDelta: {x: 220, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1527710138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527710136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2fbbae6a44c8744a69406e5289eca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  min: 1
-  sec: 57
-  timeText: {fileID: 1527710139}
 --- !u!114 &1527710139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -933,6 +917,7 @@ GameObject:
   - component: {fileID: 1542532572}
   - component: {fileID: 1542532574}
   - component: {fileID: 1542532573}
+  - component: {fileID: 1542532575}
   m_Layer: 5
   m_Name: ScorePoint
   m_TagString: Untagged
@@ -1001,6 +986,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542532571}
   m_CullTransparentMesh: 1
+--- !u!114 &1542532575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542532571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bfdf54ea8322904c84df0950e191960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1542532573}
 --- !u!1 &1547849849
 GameObject:
   m_ObjectHideFlags: 0
