@@ -16,7 +16,6 @@ public class Timing2Manager : MonoBehaviour
     void Update()
     {
         if (StickManager.isPerfect) {
-            //Debug.Log("aaa");
             playerManager.Shan();
         }
 

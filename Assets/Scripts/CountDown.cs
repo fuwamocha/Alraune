@@ -31,6 +31,7 @@ public class CountDown : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         _textCountdown.text = "Start!";
+        yield return new WaitForSeconds(1);
 
         _textCountdown.text = "";
         _textCountdown.gameObject.SetActive(false);

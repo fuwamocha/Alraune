@@ -33,11 +33,11 @@ public class StairsManager : MonoBehaviour
 
                 while(count<line){
                     count++;
-                    Instantiate(StairStep, new Vector3(-2.31f,7.01f + 9.6f * count, 0), Quaternion.identity);    
+                    Instantiate(StairStep, new Vector3(-3.35f,7.01f + 9.6f * count, 0), Quaternion.identity);    
                 }
                 if (count==line){
                     count++;
-                    Instantiate(StairStepLast, new Vector3(-2.31f, 7.01f + 9.6f * count, 0), Quaternion.identity);
+                    Instantiate(StairStepLast, new Vector3(-3.35f, 7.01f + 9.6f * count, 0), Quaternion.identity);
                 }
             }
     }

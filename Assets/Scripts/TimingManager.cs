@@ -26,7 +26,7 @@ public class TimingManager : MonoBehaviour
             autoJump = true;
         }
 
-        if (timing >= time170 * 1000f - 565f && timing < time170 * 1000f - 535f) {  // 140f`170f ‚ÌŒë·H
+        if (timing >= time170 * 1000f - 475f && timing < time170 * 1000f - 445f) {
             if (autoJump) {
                 playerManager.AutoJump();
             } else if (isAutoJump) {
