@@ -39,10 +39,12 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
 
+        /*
         // デバッグ用　のけぞり
         if (Input.GetKeyDown(KeyCode.U)) {
             animator.SetTrigger("Miss");
         }
+        */
     }
 
     private void FixedUpdate()

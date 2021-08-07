@@ -7,10 +7,10 @@ public class AlrauneMovement : MonoBehaviour
     [SerializeField] LayerMask groundLayer = default;
 
     private int count = 0;
-    private float xSpeed;
-    private float jumpPower = 940f;
     private float x;
     private float y;
+    private float xSpeed;
+    private float jumpPower = 940f;
     private bool isJump = false;
     private bool canJump = false;
 
@@ -25,10 +25,12 @@ public class AlrauneMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         // デバッグ用
         if (Input.GetKeyDown(KeyCode.U)) {
             Warp();
         }
+        */
     }
 
     private void FixedUpdate()
@@ -49,7 +51,6 @@ public class AlrauneMovement : MonoBehaviour
             if (count % 4 == 0) {
                 transform.localScale = new Vector2(transform.localScale.x * -1f, 1f);
             }
-
         } else if (isJump) {
             xSpeed = Mathf.Sign(transform.localScale.x);
             vector.x = xSpeed * 7.6f;
