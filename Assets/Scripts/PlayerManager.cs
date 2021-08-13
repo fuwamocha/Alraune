@@ -35,7 +35,7 @@ public class PlayerManager : MonoBehaviour
 
         //Debug.DrawLine(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, Color.red);
 
-        // ƒAƒjƒ[ƒVƒ‡ƒ“‘JˆÚ
+        // ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
         if (HitGround() && animator.GetBool("Jump")) {
             animator.SetBool("Jump", false);
@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         /*
-        // ƒfƒoƒbƒO—p@‚Ì‚¯‚¼‚è
+        // ï¿½fï¿½oï¿½bï¿½Oï¿½pï¿½@ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½
         if (Input.GetKeyDown(KeyCode.U)) {
             animator.SetTrigger("Miss");
         }
@@ -53,16 +53,16 @@ public class PlayerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // ƒvƒŒƒCƒ„[‚ÌŒü‚«
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌŒï¿½ï¿½ï¿½
         if (xSpeed != 0) {
             transform.localScale = new Vector2(xSpeed * 1.25f, 1.25f);
         }
 
-        // ˆÚ“®ˆ—
+        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
         vector.x = xSpeed * 5f;
         vector.y = rb.velocity.y;
 
-        // ƒI[ƒgƒWƒƒƒ“ƒvˆ—
+        // ï¿½Iï¿½[ï¿½gï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½
         if (autoJump) {
             if (canJump && HitGround()) {
                 count++;
@@ -85,17 +85,17 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        // ˆÚ“®ˆ—
+        // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½ï¿½
         rb.velocity = vector;
     }
 
-    // Ú’n”»’è
+    // ï¿½Ú’nï¿½ï¿½ï¿½ï¿½
     private bool HitGround()
     {
         return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
     }
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“‘JˆÚ
+    // ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½
     public void RythemAnim()
     {
         animator.SetTrigger("Rythem");

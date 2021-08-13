@@ -25,7 +25,7 @@ public class StairsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        line = steps / 16 - 3;
+        line = 9;
         
     if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -33,11 +33,11 @@ public class StairsManager : MonoBehaviour
 
                 while(count<line){
                     count++;
-                    Instantiate(StairStep, new Vector3(-3.35f,7.01f + 9.6f * count, 0), Quaternion.identity);    
+                    Instantiate(StairStep, new Vector3(-0.35f,-0.2f + 19.2f * count, 0), Quaternion.identity);    
                 }
                 if (count==line){
                     count++;
-                    Instantiate(StairStepLast, new Vector3(-3.35f, 7.01f + 9.6f * count, 0), Quaternion.identity);
+                    Instantiate(StairStepLast, new Vector3(-0.35f, -0.2f + 19.2f * count, 0), Quaternion.identity);
                 }
             }
     }
