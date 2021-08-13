@@ -3490,29 +3490,19 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -3, y: 12, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 1
-      m_TileSpriteIndex: 0
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: 296c899d4b783e14eaa637fa6daa1443, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data: {fileID: 21300000, guid: b9c55f40fe739f0438fda00bf6036a5b, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data:
       e00: 1
       e01: 0
@@ -3531,7 +3521,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 17
+  - m_RefCount: 16
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
@@ -3619,22 +3609,6 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1407451894}
     m_ColliderPaths:
-    - - X: -40149156
-        Y: 144029831
-      - X: -40149156
-        Y: 155970201
-      - X: -40149215
-        Y: 155970260
-      - X: -59850785
-        Y: 155970260
-      - X: -59850844
-        Y: 155970201
-      - X: -59850844
-        Y: 144029831
-      - X: -59850785
-        Y: 144029772
-      - X: -40149215
-        Y: 144029772
     - - X: -20149254
         Y: 143970160
       - X: -39850744
@@ -3765,10 +3739,6 @@ CompositeCollider2D:
         Y: -47970152
   m_CompositePaths:
     m_Paths:
-    - - {x: -4.0149508, y: 14.402978}
-      - {x: -4.0149508, y: 15.597026}
-      - {x: -5.9850845, y: 15.596991}
-      - {x: -5.9850492, y: 14.402978}
     - - {x: -2.0149548, y: 13.202986}
       - {x: -2.0149548, y: 14.397017}
       - {x: -3.9850745, y: 14.396987}
