@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 9156304625395609707}
   - component: {fileID: 9156304625395609704}
   - component: {fileID: 6010868918930418092}
-  - component: {fileID: 1037969992}
   - component: {fileID: 564099546}
   - component: {fileID: 4803883980431462701}
   - component: {fileID: 1363656428}
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 7ec54ce200520d04dba874eb49e9d636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b9c55f40fe739f0438fda00bf6036a5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,19 +113,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.32, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &1037969992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9156304625395609706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51520c8bac885e8469854c6596de521a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StairStep: {fileID: 9156304625395609706}
 --- !u!61 &564099546
 BoxCollider2D:
   m_ObjectHideFlags: 0
