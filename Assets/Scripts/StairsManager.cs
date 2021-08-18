@@ -26,19 +26,18 @@ public class StairsManager : MonoBehaviour
     void Update()
     {
         line = 9;
-        
-    if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            while (count < line)
             {
-                
-
-                while(count<line){
-                    count++;
-                    Instantiate(StairStep, new Vector3(-0.35f,-0.2f + 19.2f * count, 0), Quaternion.identity);    
-                }
-                if (count==line){
-                    count++;
-                    Instantiate(StairStepLast, new Vector3(-0.35f, -0.2f + 19.2f * count, 0), Quaternion.identity);
-                }
+                count++;
+                Instantiate(StairStep, new Vector3(-0.35f, -0.2f + 19.2f * count, 0), Quaternion.identity);
             }
+            if (count == line)
+            {
+                count++;
+                Instantiate(StairStepLast, new Vector3(-0.35f, -0.2f + 19.2f * count, 0), Quaternion.identity);
+            }
+        }
     }
 }

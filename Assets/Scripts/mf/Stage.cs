@@ -14,26 +14,14 @@ public class Stage : MonoBehaviour
     public int line;
 
     // ジャンプカウント
-    private int count = 0;
+    public int count = 0;
+    //Instantiate(StairStep, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
 
-    void Start()
+    private void Awake()
     {
-
-    }
-
-    void Update()
-    {
-
-        while (count < line)
+        for (count = 0; count < line; count++)
         {
-            count++;
             Instantiate(StairStep, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
         }
-        if (count == line)
-        {
-            count++;
-            Instantiate(StairStepLast, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
-        }
-
     }
 }
