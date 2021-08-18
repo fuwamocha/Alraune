@@ -5,23 +5,28 @@ using UnityEngine;
 public class Stage : MonoBehaviour
 {
 
-    int StageIndex;
+    //int StageIndex;
 
-    public GameObject StairStep; //ステージのプレハブ
-    public GameObject StairStepLast;
-    // ノーツ数
-    //public int steps = 331 - 16;
+    public GameObject StairStep; //スクリプトの無いprefab
+    public GameObject StairStepLast; //スクリプトの無いprefab
     public int line;
-
-    // ジャンプカウント
     public int count = 0;
-    //Instantiate(StairStep, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
 
-    private void Awake()
+    private void Start()
     {
-        for (count = 0; count < line; count++)
+    }
+
+    private void Update()
+    {
+        while (count < line)
         {
+            count++;
             Instantiate(StairStep, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
+        }
+        if (count == line)
+        {
+            count++;
+            Instantiate(StairStepLast, new Vector3(-4.0f + 8.0f * count, 0.0f + 4.79f * count, 0), Quaternion.identity);
         }
     }
 }
