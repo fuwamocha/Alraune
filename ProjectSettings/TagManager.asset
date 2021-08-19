@@ -8,6 +8,9 @@ TagManager:
   - Wall
   - Enemy
   - Ground
+  - good
+  - ok
+  - miss
   layers:
   - Default
   - TransparentFX
