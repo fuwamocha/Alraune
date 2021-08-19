@@ -24,16 +24,22 @@ public class Output : MonoBehaviour
         {
             OkText.SetActive(true);
             StartCoroutine("OkStop");
+
+            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             GoodText.SetActive(true);
             StartCoroutine("GoodStop");
+
+            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(100);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             MissText.SetActive(true);
             StartCoroutine("MissStop");
+
+            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
         }
     }
 
