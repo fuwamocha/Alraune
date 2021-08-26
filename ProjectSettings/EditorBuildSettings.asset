@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Credit.unity
     guid: c59d068af908e3243bd21deca553e981
+  - enabled: 1
+    path: Assets/Scenes/MusicRoom.unity
+    guid: dcd27fa5301e4894caa13230c36b44db
   m_configObjects: {}
