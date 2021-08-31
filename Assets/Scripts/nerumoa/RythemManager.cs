@@ -14,6 +14,7 @@ public class RythemManager : MonoBehaviour
     public double elaspedTime = 0d;             // 経過時間
     private double bufferTime;              // 緩衝時間 (SE用)
     private double bpm170 = 120 / 170d;
+    private double delay = 0.01d;
     private bool cooldown = false;
 
     private AudioSource audio_BGM;
@@ -25,18 +26,18 @@ public class RythemManager : MonoBehaviour
     {
         audio_BGM = BGMs.GetComponent<AudioSource>();   // BGMの管理
         audio_BGM.clip = BGM[0];
-        audio_BGM.Play();
+        audio_BGM.PlayScheduled(delay);
         audio_SE = SEs.GetComponent<AudioSource>();     // SEの管理
         audio_SE.clip = SE[0];
 
-        initTime = AudioSettings.dspTime;
+        initTime = AudioSettings.dspTime - delay;
         bufferTime = bpm170 * 1000d * 0.92;
     }
 
     private void FixedUpdate()
     {
         totalTime = AudioSettings.dspTime - initTime;   // トータル経過時間 (s)
-        elaspedTime = totalTime % bpm170 * 1000d;     // 1回毎の経過時間 (ms)
+        elaspedTime = totalTime % bpm170 * 1000d;       // 1回毎の経過時間 (ms)
 
         if (elaspedTime >= bufferTime) {
 
