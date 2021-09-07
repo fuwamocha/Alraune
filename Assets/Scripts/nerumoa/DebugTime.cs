@@ -14,6 +14,7 @@ public class DebugTime : MonoBehaviour
     {
         if (isChecked) {
             timeText.text = rythem.aTime.ToString("N9");
+            timeText.text += "sec";
         } else {
             timeText.text = rythem.bTime.ToString("N9");
         }

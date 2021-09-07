@@ -8,10 +8,12 @@ public class RythemManager : MonoBehaviour
     [SerializeField] AudioClip[] SE = default;
     [SerializeField] GameObject BGMs = default;
     [SerializeField] GameObject SEs = default;
+    [SerializeField] Player2Manager player = default;
 
     private double totalTime = 0d;          // トータル経過時間 (sec)
     private double elaspedTime;             // 1回毎の経過時間 (sec)
     private double bufferTime;              // 緩衝時間 (タイミングの同期用)
+    private double justTime;                // 時間調整用
     private double bpm170 = 120 / 170d;
     private bool cooldown = false;          // 連続実行の防止用
 
@@ -41,14 +43,21 @@ public class RythemManager : MonoBehaviour
         if (elaspedTime >= bufferTime) {
 
             if (!cooldown) {
-                audio_SE.PlayScheduled(bpm170 - elaspedTime);
+                justTime = bpm170 - elaspedTime;
+                audio_SE.PlayScheduled(justTime);
+                Invoke("CallAutoJump", (float)justTime);
                 cooldown = true;
 
                 aTime = totalTime + (bpm170 - elaspedTime);     // デバッグ用 (曲の経過時間)
-                bTime = aTime % bpm170;                         // デバッグ用
+                //bTime = aTime % bpm170;                         // デバッグ用
             }
         } else if (cooldown) {
             cooldown = false;
         }
+    }
+
+    private void CallAutoJump()
+    {
+        player.AutoJump();
     }
 }
