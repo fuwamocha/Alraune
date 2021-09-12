@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 曲とリズムの同期を行うクラス
+/// </summary>
 public class RythemManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] BGM = default;
@@ -9,6 +12,7 @@ public class RythemManager : MonoBehaviour
     [SerializeField] GameObject BGMs = default;
     [SerializeField] GameObject SEs = default;
     [SerializeField] Player2Manager player = default;
+    [SerializeField] BlockReader block = default;
 
     private double totalTime = 0d;          // トータル経過時間 (sec)
     private double elaspedTime;             // 1回毎の経過時間 (sec)
@@ -16,12 +20,11 @@ public class RythemManager : MonoBehaviour
     private double justTime;                // 時間調整用
     private double bpm170 = 120 / 170d;
     private bool cooldown = false;          // 連続実行の防止用
-
     private AudioSource audio_BGM;
     private AudioSource audio_SE;
 
-    public double aTime;
-    public double bTime;
+
+    public double aTime;        // デバッグ用
 
     private void Start()
     {
@@ -39,7 +42,16 @@ public class RythemManager : MonoBehaviour
         totalTime = audio_BGM.time;
         elaspedTime = totalTime % bpm170;
 
-        /* 適正タイミングの算出・実行 */
+        RightTiming();
+        block.ConvertLocal(elaspedTime);
+    }
+
+
+    /// <summary>
+    /// 適正タイミングの算出・実行
+    /// </summary>
+    private void RightTiming()
+    {
         if (elaspedTime >= bufferTime) {
 
             if (!cooldown) {
@@ -49,7 +61,6 @@ public class RythemManager : MonoBehaviour
                 cooldown = true;
 
                 aTime = totalTime + (bpm170 - elaspedTime);     // デバッグ用 (曲の経過時間)
-                //bTime = aTime % bpm170;                         // デバッグ用
             }
         } else if (cooldown) {
             cooldown = false;
