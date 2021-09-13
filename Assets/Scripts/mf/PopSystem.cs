@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PopSystem : MonoBehaviour
 {
+    [SerializeField] private GameObject a;
+
     //スタートと終わりの目印
     public Transform startMarker;
     public Transform endMarker;
@@ -18,6 +20,8 @@ public class PopSystem : MonoBehaviour
     {
         //二点間の距離を代入(スピード調整に使う)
         distance_two = Vector3.Distance(startMarker.position, endMarker.position);
+        //a.SetActive(false);
+        Invoke("Stop", 2);
     }
 
     void Update()
@@ -28,5 +32,10 @@ public class PopSystem : MonoBehaviour
 
         // オブジェクトの移動(ここだけ変わった！)
         transform.position = Vector3.Slerp(startMarker.position, endMarker.position, present_Location);
+    }
+
+    void Stop()
+    {
+        a.SetActive(false);
     }
 }
