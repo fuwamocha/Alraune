@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class Output : MonoBehaviour
 {
-    public GameObject OkText;
-    public GameObject GoodText;
-    public GameObject MissText;
+    public GameObject Ok;
+    public GameObject Good;
+    public GameObject Miss;
 
     // Start is called before the first frame update
     void Start()
     {
-        OkText.SetActive(false);
-        GoodText.SetActive(false);
-        MissText.SetActive(false);
+        Ok.SetActive(false);
+        Good.SetActive(false);
+        Miss.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,40 +22,44 @@ public class Output : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            OkText.SetActive(true);
+            Ok.SetActive(true);
             StartCoroutine("OkStop");
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
+            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
-            GoodText.SetActive(true);
+            Good.SetActive(true);
             StartCoroutine("GoodStop");
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(100);
+            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            MissText.SetActive(true);
+            Miss.SetActive(true);
             StartCoroutine("MissStop");
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
+            GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
+            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
         }
     }
 
     private IEnumerator OkStop()
     {
-        yield return new WaitForSeconds(1.0f);
-        OkText.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Ok.SetActive(false);
     }
     private IEnumerator GoodStop()
     {
-        yield return new WaitForSeconds(1.0f);
-        GoodText.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Good.SetActive(false);
     }
     private IEnumerator MissStop()
     {
-        yield return new WaitForSeconds(1.0f);
-        MissText.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        Miss.SetActive(false);
     }
 }
