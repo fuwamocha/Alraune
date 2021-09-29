@@ -10,6 +10,10 @@ public class Player2Manager : MonoBehaviour
     [SerializeField] LayerMask groundLayer = default;
 
     public bool pressSpace = false;
+    public bool upArrow = false;
+    public bool downArrow = false;
+    public bool leftArrow = false;
+    public bool rightArrow = false;
     public RaycastHit2D hit;
 
     private float xSpeed;
@@ -58,9 +62,22 @@ public class Player2Manager : MonoBehaviour
     /// </summary>
     private void PlayerKeyboard()
     {
-        xSpeed = Input.GetAxisRaw("Horizontal");
+        //xSpeed = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space)) {
             pressSpace = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            upArrow = true;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            downArrow = true;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            leftArrow = true;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            rightArrow = true;
         }
     }
 
