@@ -11,12 +11,12 @@ public class Score : MonoBehaviour
     void Start()
     {
         this.textComponent = GameObject.Find("ScoreText").GetComponent<Text>();
-        this.textComponent.text = "ScoreÅF " + score.ToString();
+        this.textComponent.text = score.ToString();
     }
 
     public void AddScore(int num)
     {
         this.score += num;
-        this.textComponent.text = "ScoreÅF " + score.ToString();
+        this.textComponent.text = score.ToString();
     }
 }
