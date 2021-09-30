@@ -32,6 +32,6 @@ public class CountDown : MonoBehaviour
 
         _textCountdown.text = "";
         _textCountdown.gameObject.SetActive(false);
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("MainScene");
     }
 }
