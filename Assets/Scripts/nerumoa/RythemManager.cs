@@ -12,6 +12,7 @@ public class RythemManager : MonoBehaviour
     [SerializeField] GameObject BGMs = default;
     [SerializeField] GameObject SEs = default;
     [SerializeField] Player2Manager player = default;
+    [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
 
     private double totalTime = 0d;          // トータル経過時間 (sec)
@@ -70,5 +71,6 @@ public class RythemManager : MonoBehaviour
     private void CallAutoJump()
     {
         player.AutoJump();
+        enemy.AutoJump();
     }
 }
