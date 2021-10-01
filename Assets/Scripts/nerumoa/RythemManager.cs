@@ -8,9 +8,9 @@ using UnityEngine;
 public class RythemManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] BGM = default;
-    [SerializeField] AudioClip[] SE = default;
+    //[SerializeField] AudioClip[] SE = default;
     [SerializeField] GameObject BGMs = default;
-    [SerializeField] GameObject SEs = default;
+    //[SerializeField] GameObject SEs = default;
     [SerializeField] Player2Manager player = default;
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
@@ -22,7 +22,7 @@ public class RythemManager : MonoBehaviour
     private double bpm170 = 120 / 170d;
     private bool cooldown = false;          // 連続実行の防止用
     private AudioSource audio_BGM;
-    private AudioSource audio_SE;
+    //private AudioSource audio_SE;
 
 
     public double aTime;        // デバッグ用
@@ -32,8 +32,8 @@ public class RythemManager : MonoBehaviour
         audio_BGM = BGMs.GetComponent<AudioSource>();   // BGMの管理
         audio_BGM.clip = BGM[0];
         audio_BGM.Play();
-        audio_SE = SEs.GetComponent<AudioSource>();     // SEの管理
-        audio_SE.clip = SE[0];
+        //audio_SE = SEs.GetComponent<AudioSource>();     // SEの管理
+        //audio_SE.clip = SE[0];
 
         bufferTime = bpm170 * 0.92;
     }
@@ -54,10 +54,9 @@ public class RythemManager : MonoBehaviour
     private void RightTiming()
     {
         if (elaspedTime >= bufferTime) {
-
             if (!cooldown) {
                 justTime = bpm170 - elaspedTime;
-                audio_SE.PlayScheduled(justTime);
+                //audio_SE.PlayScheduled(justTime);
                 Invoke("CallAutoJump", (float)justTime);
                 cooldown = true;
 
@@ -71,6 +70,6 @@ public class RythemManager : MonoBehaviour
     private void CallAutoJump()
     {
         player.AutoJump();
-        enemy.AutoJump();
+        //enemy.AutoJump();
     }
 }

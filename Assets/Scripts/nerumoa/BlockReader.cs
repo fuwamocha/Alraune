@@ -11,6 +11,7 @@ public class BlockReader : MonoBehaviour
 
     [SerializeField] Player2Manager player = default;
 
+    private int timerNum;
     private double bpm170 = 120 / 170d; // 関数が必要？
     private double canSpaceTime;
     private double cantSpaceTime;      // 押さないブロック用？
@@ -21,15 +22,24 @@ public class BlockReader : MonoBehaviour
     private double exStartTime;
     private double exEndTime;
     private double _elaspedTime = 0d;
+    private double bufferTime;
+    private double twiceSTime;
+    private double twiceETime;
+    private double justTime;
     private bool missTime;
     private bool goodTime;
     private bool greatTime;
     private bool exTime;
-    private bool cooldown = true;
+    private bool pressCooldown = true;
     private bool wrongKey = false;
+    private bool pressArrow;
+    private bool cooldown;
+    private bool cooldown2;
+    private string hitBlock;
     private RaycastHit2D _hit;
 
-    private string hitBlock;
+
+    private AudioSource audio;      // 仮SE
 
     private enum Block
     {
@@ -51,6 +61,12 @@ public class BlockReader : MonoBehaviour
 
     private void Start()
     {
+        audio = GetComponent<AudioSource>();
+
+        bufferTime = bpm170 * 0.70;
+        twiceSTime = bpm170 * 0.20;
+        twiceETime = bpm170 * 0.25;
+
         excellent.SetActive(false);
         great.SetActive(false);
         Good.SetActive(false);
@@ -59,14 +75,8 @@ public class BlockReader : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (bpm170 * 0.70 <= _elaspedTime && _elaspedTime <= bpm170 * 0.75) {
-            cooldown = false;   // タイミングを固定化する(Rythem Managerでやってるみたいな感じ) bufferTime
-            wrongKey = false;
-            ReadBlock();
-        }
-
+        CheckTiming();
         PressSpace();
-
     }
 
 
@@ -105,121 +115,120 @@ public class BlockReader : MonoBehaviour
         switch (block) {
             case Block.NORMAL:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.pressSpace && !cooldown) {
-                        cooldown = true;
+                    if (player.pressSpace && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
                     JudgeSpace();
                 }
                 break;
 
             case Block.TWICE:
 
-                AAA();
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.pressSpace && !cooldown) {
-                        cooldown = true;
+                if (timerNum == 1) {
+                    if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
+                        if (player.pressSpace && !pressCooldown) {
+                            pressCooldown = true;
+                            JudgeSpace();
+                        }
+                    } else if (_elaspedTime < bpm170 * 0.25 && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
-                    JudgeSpace();
+                } else if (timerNum == 2) {
+                    if (canSpaceTime <= _elaspedTime && _elaspedTime <= goodEndTime) {
+                        if (player.pressSpace && !pressCooldown) {
+                            pressCooldown = true;
+                            JudgeSpace();
+                        }
+                    } else if (_elaspedTime < bpm170 * 0.75 && !pressCooldown) {
+                        pressCooldown = true;
+                        JudgeSpace();
+                    }
                 }
                 break;
 
             case Block.SKIP:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= cantSpaceTime) {
-
-                    if (player.pressSpace && !cooldown) {
-                        cooldown = true;
-                        Skip();
+                    pressArrow = player.upArrow || player.downArrow || player.leftArrow || player.rightArrow;
+                    if ((player.pressSpace || pressArrow) && !pressCooldown) {
+                        pressCooldown = true;
+                        JudgeSkip();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
-                    Skip();
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
+                    JudgeSkip();
                 }
                 break;
 
             case Block.CROSSUP:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.upArrow && !cooldown) {
-                        cooldown = true;
+                    if (player.upArrow && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     } else if (player.downArrow || player.leftArrow || player.rightArrow) {
-                        cooldown = true;
+                        pressCooldown = true;
                         wrongKey = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
                     JudgeSpace();
                 }
                 break;
 
             case Block.CROSSDOWN:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.downArrow && !cooldown) {
-                        cooldown = true;
+                    if (player.downArrow && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     } else if (player.upArrow || player.leftArrow || player.rightArrow) {
-                        cooldown = true;
+                        pressCooldown = true;
                         wrongKey = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
                     JudgeSpace();
                 }
                 break;
 
             case Block.CROSSLEFT:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.leftArrow && !cooldown) {
-                        cooldown = true;
+                    if (player.leftArrow && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     } else if (player.upArrow || player.downArrow || player.rightArrow) {
-                        cooldown = true;
+                        pressCooldown = true;
                         wrongKey = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
                     JudgeSpace();
                 }
                 break;
 
             case Block.CROSSRIGHT:
 
-                AAA();
                 if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime) {
-
-                    if (player.rightArrow && !cooldown) {
-                        cooldown = true;
+                    if (player.rightArrow && !pressCooldown) {
+                        pressCooldown = true;
                         JudgeSpace();
                     } else if (player.upArrow || player.downArrow || player.leftArrow) {
-                        cooldown = true;
+                        pressCooldown = true;
                         wrongKey = true;
                         JudgeSpace();
                     }
-                } else if (_elaspedTime < bpm170 * 0.4 && !cooldown) {
-                    cooldown = true;
+                } else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown) {
+                    pressCooldown = true;
                     JudgeSpace();
                 }
                 break;
@@ -237,11 +246,7 @@ public class BlockReader : MonoBehaviour
     /// </summary>
     private void JudgeSpace()
     {
-        exTime    = exStartTime    <= _elaspedTime || _elaspedTime <= exEndTime;
-        greatTime = greatStartTime <= _elaspedTime || _elaspedTime <= greatEndTime;
-        goodTime  = goodStartTime  <= _elaspedTime || _elaspedTime <= goodEndTime;
-        missTime  = (goodEndTime < _elaspedTime && _elaspedTime < goodStartTime) || wrongKey;
-
+        JudgeTime();
         if (missTime) {
             Debug.Log("Miss!");
             Miss.SetActive(true);
@@ -250,6 +255,7 @@ public class BlockReader : MonoBehaviour
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
+            return;
         } else if (exTime) {
             Debug.Log("Excellent!");
             excellent.SetActive(true);
@@ -273,10 +279,13 @@ public class BlockReader : MonoBehaviour
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         } else {
             Debug.Log("ERROR");
+            return;
         }
+
+        audio.Play();
     }
 
-    private void Skip()
+    private void JudgeSkip()
     {
         missTime = canSpaceTime <= _elaspedTime || _elaspedTime <= cantSpaceTime;
 
@@ -288,6 +297,7 @@ public class BlockReader : MonoBehaviour
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
+            return;
         } else {
             Debug.Log("Excellent!");
             excellent.SetActive(true);
@@ -295,6 +305,23 @@ public class BlockReader : MonoBehaviour
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
+        }
+
+        //audio.Play();
+    }
+
+    private void JudgeTime()
+    {
+        if (timerNum == 1) {
+            exTime = exStartTime <= _elaspedTime || _elaspedTime <= exEndTime;
+            greatTime = greatStartTime <= _elaspedTime || _elaspedTime <= greatEndTime;
+            goodTime = goodStartTime <= _elaspedTime || _elaspedTime <= goodEndTime;
+            missTime = (goodEndTime < _elaspedTime && _elaspedTime < goodStartTime) || wrongKey;
+        } else if (timerNum == 2) {
+            exTime = exStartTime <= _elaspedTime && _elaspedTime <= exEndTime;
+            greatTime = greatStartTime <= _elaspedTime && _elaspedTime <= greatEndTime;
+            goodTime = goodStartTime <= _elaspedTime && _elaspedTime <= goodEndTime;
+            missTime = goodEndTime < _elaspedTime || _elaspedTime < goodStartTime || wrongKey;
         }
     }
 
@@ -307,8 +334,9 @@ public class BlockReader : MonoBehaviour
         _hit = player.hit;
     }
 
-    private void AAA()
+    private void NormalTimer()
     {
+        timerNum = 1;
         canSpaceTime = bpm170 * 0.75;
         cantSpaceTime = bpm170 * 0.25;      // 押さないブロック用？
         goodStartTime = bpm170 * 0.85;
@@ -319,8 +347,9 @@ public class BlockReader : MonoBehaviour
         exEndTime = bpm170 * 0.03;
     }
 
-    private void BBB()
+    private void TwiceTimer()
     {
+        timerNum = 2;
         canSpaceTime = bpm170 * 0.25;
         cantSpaceTime = bpm170 * 0.75;      // 押さないブロック用？
         goodStartTime = bpm170 * 0.35;
@@ -330,6 +359,46 @@ public class BlockReader : MonoBehaviour
         exStartTime = bpm170 * 0.47;
         exEndTime = bpm170 * 0.53;
     }
+
+    private void CheckTiming()
+    {
+        /* ブロックの更新 */
+        if (_elaspedTime >= bufferTime) {
+            if (!cooldown) {
+                justTime = bpm170 * 0.75 - _elaspedTime;
+                Invoke("UpdateBlock", (float)justTime);
+                cooldown = true;
+            }
+        } else if (cooldown) {
+            cooldown = false;
+        }
+
+        /* TWICEブロックの更新 */
+        if (block == Block.TWICE && twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime) {
+            if (!cooldown2) {
+                justTime = bpm170 * 0.25 - _elaspedTime;
+                Invoke("UpdateTwice", (float)justTime);
+                cooldown2 = true;
+            }
+        } else if (cooldown2) {
+            cooldown2 = false;
+        }
+    }
+    private void UpdateBlock()
+    {
+        NormalTimer();
+        pressCooldown = false;
+        wrongKey = false;
+        ReadBlock();
+    }
+
+    private void UpdateTwice()
+    {
+        TwiceTimer();
+        pressCooldown = false;
+        wrongKey = false;
+    }
+
 
     private IEnumerator excellentStop()
     {

@@ -93,6 +93,10 @@ public class Player2Manager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
     }
+    public void RythemAnim()
+    {
+        animator.SetTrigger("Rythem");
+    }
 
     /// <summary>
     /// 接地判定の取得
@@ -107,12 +111,6 @@ public class Player2Manager : MonoBehaviour
                                  transform.position - transform.up * 1.30f,
                                  groundLayer);
         return hit;
-    }
-
-    public void RythemAnim()
-    {
-        // できれば PlayerAnimation関数 と統合
-        animator.SetTrigger("Rythem");
     }
 
     public void AutoJump()
