@@ -17,10 +17,10 @@ public class ComboSystem : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (ComboCount == 5 && call == false)
+        if (ComboCount >= 0 && call == false)
         {
             call = true;
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(5000);
+            GameObject.Find("ScoreText").GetComponent<Score>().count = 2;
             StartCoroutine("Delay");
         }
     }

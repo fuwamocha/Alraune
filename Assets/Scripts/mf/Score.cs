@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     private int score = 0;
+    public int count = 1;
     Text textComponent;
 
     void Start()
@@ -16,7 +17,7 @@ public class Score : MonoBehaviour
 
     public void AddScore(int num)
     {
-        this.score += num;
+        this.score += (num * count);
         this.textComponent.text = score.ToString();
     }
 }
