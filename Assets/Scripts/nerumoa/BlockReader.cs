@@ -54,6 +54,8 @@ public class BlockReader : MonoBehaviour
 
     private Block block;
 
+    public GameObject playerpos;
+
     public GameObject excellent;
     public GameObject great;
     public GameObject Good;
@@ -67,10 +69,10 @@ public class BlockReader : MonoBehaviour
         twiceSTime = bpm170 * 0.20;
         twiceETime = bpm170 * 0.25;
 
-        excellent.SetActive(false);
+        /*excellent.SetActive(false);
         great.SetActive(false);
         Good.SetActive(false);
-        Miss.SetActive(false);
+        Miss.SetActive(false);*/
     }
 
     private void FixedUpdate()
@@ -249,8 +251,9 @@ public class BlockReader : MonoBehaviour
         JudgeTime();
         if (missTime) {
             Debug.Log("Miss!");
-            Miss.SetActive(true);
-            StartCoroutine("MissStop");
+            //Miss.SetActive(true);
+            //StartCoroutine("MissStop");
+            Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
@@ -258,22 +261,25 @@ public class BlockReader : MonoBehaviour
             return;
         } else if (exTime) {
             Debug.Log("Excellent!");
-            excellent.SetActive(true);
-            StartCoroutine("excellentStop");
+            //excellent.SetActive(true);
+            //StartCoroutine("excellentStop");
+            Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         } else if (greatTime) {
             Debug.Log("Great!");
-            great.SetActive(true);
-            StartCoroutine("greatStop");
+            //great.SetActive(true);
+            //StartCoroutine("greatStop");
+            Instantiate(great, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(300);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         } else if (goodTime) {
             Debug.Log("Good!");
-            Good.SetActive(true);
-            StartCoroutine("GoodStop");
+            //Good.SetActive(true);
+            //StartCoroutine("GoodStop");
+            Instantiate(Good, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(100);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
@@ -291,8 +297,10 @@ public class BlockReader : MonoBehaviour
 
         if (missTime) {
             Debug.Log("Miss!");
-            Miss.SetActive(true);
-            StartCoroutine("MissStop");
+            //Miss.SetActive(true);
+            //StartCoroutine("MissStop");
+            Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
+
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
@@ -300,8 +308,9 @@ public class BlockReader : MonoBehaviour
             return;
         } else {
             Debug.Log("Excellent!");
-            excellent.SetActive(true);
-            StartCoroutine("excellentStop");
+            //excellent.SetActive(true);
+            //StartCoroutine("excellentStop");
+            Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
