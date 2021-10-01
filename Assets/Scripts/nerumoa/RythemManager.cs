@@ -70,6 +70,6 @@ public class RythemManager : MonoBehaviour
     private void CallAutoJump()
     {
         player.AutoJump();
-        //enemy.AutoJump();
+        enemy.AutoJump();
     }
 }
