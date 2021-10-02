@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class scale : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class scale : MonoBehaviour
     private void Update()
     {
         timeb = GameObject.Find("Rythem Manager").GetComponent<RythemManager>().totalTime;
-        float timef = (float)timeb;
-        transform.localScale = (Mathf.Sin(2 * Mathf.PI * timef * power + 1) * 0.5f * maxScale);
+        float timef = (float)(2 * Math.PI * timeb * power);
+        transform.localScale = (Mathf.Sin(timef + 1) * 0.5f * maxScale);
     }
 }
