@@ -15,7 +15,7 @@ public class RythemManager : MonoBehaviour
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
 
-    private double totalTime = 0d;          // トータル経過時間 (sec)
+    public double totalTime = 0d;          // トータル経過時間 (sec)
     private double elaspedTime;             // 1回毎の経過時間 (sec)
     private double bufferTime;              // 緩衝時間 (タイミングの同期用)
     private double justTime;                // 時間調整用
