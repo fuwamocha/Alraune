@@ -9,6 +9,8 @@ public class Player2Manager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
 
+    public bool noJump = false;     // ジャンプのオン/オフ切り替え用
+
     public bool pressSpace = false;
     public bool upArrow = false;
     public bool downArrow = false;
@@ -16,15 +18,13 @@ public class Player2Manager : MonoBehaviour
     public bool rightArrow = false;
     public RaycastHit2D hit;
 
+    private float xLocal;
     private float xSpeed;
-  //private float jumpPower = 950f;
+  　private float jumpPower = 750f;
     private bool autoJump = false;
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 vector;
-
-
-    public bool noJump = false;     // デバッグ用
 
     private void Start()
     {
@@ -40,20 +40,25 @@ public class Player2Manager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (xSpeed != 0) {
-            transform.localScale = new Vector2(xSpeed * 0.8f, 0.8f);
-        }
-
-        /* 移動処理 */
-        vector.x = xSpeed * 5f;
-        vector.y = rb.velocity.y;
-        rb.velocity = vector;
+        /* ショータ君の向き */
+        xLocal = Mathf.Sign(transform.localScale.x);
+        transform.localScale = new Vector2(xLocal * 0.8f, 0.8f);
 
         /* 自動ジャンプ処理 */
         if (autoJump && !noJump) {
-            transform.Translate(1.265f, 2.0f, 0f);
+            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
+            xSpeed = 6.32515f;
             autoJump = false;
+
+            //transform.Translate(1.265f, 2.0f, 0f);
+        } else if (HitGround()) {
+            xSpeed = 0f;
         }
+
+        /* 移動処理 */
+        vector.x = xSpeed * xLocal;
+        vector.y = rb.velocity.y;
+        rb.velocity = vector;
     }
 
 
@@ -62,7 +67,6 @@ public class Player2Manager : MonoBehaviour
     /// </summary>
     private void PlayerKeyboard()
     {
-        //xSpeed = Input.GetAxisRaw("Horizontal");
         if (Input.GetKeyDown(KeyCode.Space)) {
             pressSpace = true;
         }

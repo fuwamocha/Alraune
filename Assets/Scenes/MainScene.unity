@@ -1832,12 +1832,12 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  noJump: 0
   pressSpace: 0
   upArrow: 0
   downArrow: 0
   leftArrow: 0
   rightArrow: 0
-  noJump: 0
 --- !u!95 &659298063
 Animator:
   serializedVersion: 3
@@ -1963,7 +1963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659298061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.83, y: -1.44, z: 0}
+  m_LocalPosition: {x: -3.8, y: -1.44, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 729200728}
@@ -4509,6 +4509,10 @@ PrefabInstance:
     - target: {fileID: 4720703355742936639, guid: f9db832c723398641a2a6bff75240502, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720703356391037683, guid: f9db832c723398641a2a6bff75240502, type: 3}
+      propertyPath: m_SurfaceArc
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4720703356391037689, guid: f9db832c723398641a2a6bff75240502, type: 3}
       propertyPath: m_LocalPosition.x

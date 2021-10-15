@@ -68,7 +68,6 @@ public class BlockReader : MonoBehaviour
         bufferTime = bpm170 * 0.70;
         twiceSTime = bpm170 * 0.20;
         twiceETime = bpm170 * 0.25;
-
     }
 
     private void FixedUpdate()
@@ -246,7 +245,8 @@ public class BlockReader : MonoBehaviour
     {
         JudgeTime();
         if (missTime) {
-            Debug.Log("Miss!");
+            //Debug.Log("Miss!");
+            if (block == Block.TWICE) Debug.Log(_elaspedTime);
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
@@ -254,19 +254,19 @@ public class BlockReader : MonoBehaviour
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
             return;
         } else if (exTime) {
-            Debug.Log("Excellent!");
+            //Debug.Log("Excellent!");
             Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         } else if (greatTime) {
-            Debug.Log("Great!");
+            //Debug.Log("Great!");
             Instantiate(great, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(300);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
         } else if (goodTime) {
-            Debug.Log("Good!");
+            //Debug.Log("Good!");
             Instantiate(Good, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(100);
@@ -284,7 +284,7 @@ public class BlockReader : MonoBehaviour
         missTime = canSpaceTime <= _elaspedTime || _elaspedTime <= cantSpaceTime;
 
         if (missTime) {
-            Debug.Log("Miss!");
+            //Debug.Log("Miss!");
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
 
@@ -293,7 +293,7 @@ public class BlockReader : MonoBehaviour
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
             return;
         } else {
-            Debug.Log("Excellent!");
+            //Debug.Log("Excellent!");
             Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
@@ -330,8 +330,8 @@ public class BlockReader : MonoBehaviour
     private void NormalTimer()
     {
         timerNum = 1;
-        canSpaceTime = bpm170 * 0.75;
-        cantSpaceTime = bpm170 * 0.25;      // 押さないブロック用？
+        canSpaceTime = bpm170 * 0.72;
+        cantSpaceTime = bpm170 * 0.22;      // 押さないブロック用？
         goodStartTime = bpm170 * 0.85;
         goodEndTime = bpm170 * 0.15;
         greatStartTime = bpm170 * 0.92;
@@ -343,8 +343,8 @@ public class BlockReader : MonoBehaviour
     private void TwiceTimer()
     {
         timerNum = 2;
-        canSpaceTime = bpm170 * 0.25;
-        cantSpaceTime = bpm170 * 0.75;      // 押さないブロック用？
+        canSpaceTime = bpm170 * 0.22;
+        cantSpaceTime = bpm170 * 0.72;      // 押さないブロック用？
         goodStartTime = bpm170 * 0.35;
         goodEndTime = bpm170 * 0.65;
         greatStartTime = bpm170 * 0.42;
@@ -365,6 +365,12 @@ public class BlockReader : MonoBehaviour
         } else if (cooldown) {
             cooldown = false;
         }
+
+
+        // twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime がダメ説ある
+        // block.TWICEに乗っている時且つ、　？？？？？
+        // missした時間を表記するように
+        // % 余り表記してもいいかも
 
         /* TWICEブロックの更新 */
         if (block == Block.TWICE && twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime) {
