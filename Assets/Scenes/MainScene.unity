@@ -2607,8 +2607,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669729198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: -6, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
+  m_LocalPosition: {x: 0.1, y: -3.3, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 659298067}
   m_RootOrder: 2
@@ -2625,7 +2625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b253d6bdc7f3f044e9edc023db447de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: {x: 2, y: 2, z: 2}
+  maxScale: {x: 0.5, y: 0.5, z: 0.5}
   timeb: 0
 --- !u!212 &669729201
 SpriteRenderer:
@@ -15638,7 +15638,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1906341144
 Animator:
   serializedVersion: 3
