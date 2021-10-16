@@ -85,11 +85,9 @@ public class EnemyManager : MonoBehaviour
             transform.position = new Vector2(x, y);
         }
 
-        /*
-        if (missCount == 8) {
+        if (missCount == 12) {
             SceneManager.LoadScene("gameover");
         }
-        */
     }
 
     public void AutoJump()
