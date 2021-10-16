@@ -22,6 +22,7 @@ public class Player2Manager : MonoBehaviour
     private float xSpeed;
   　private float jumpPower = 750f;
     private bool autoJump = false;
+    private bool missAnim = false;
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 vector;
@@ -66,7 +67,6 @@ public class Player2Manager : MonoBehaviour
     private void PlayerKeyboard()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            //transform.Translate(1.266f, 0.95f, 0f);
             pressSpace = true;
         }
 
@@ -90,15 +90,26 @@ public class Player2Manager : MonoBehaviour
     private void PlayerAnimation()
     {
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
+
         if (HitGround() && animator.GetBool("Jump")) {
             animator.SetBool("Jump", false);
         } else if (!HitGround() && !animator.GetBool("Jump")) {
             animator.SetBool("Jump", true);
         }
+
+        if (missAnim) {
+            animator.SetTrigger("Miss");
+            missAnim = false;
+        }
     }
-    public void RythemAnim()
+    public void RythemAnimation()
     {
         animator.SetTrigger("Rythem");
+    }
+
+    public void MissAnimation()
+    {
+        missAnim = true;
     }
 
     /// <summary>

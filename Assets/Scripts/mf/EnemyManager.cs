@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// プレイヤーの動作に関するクラス
@@ -82,6 +83,10 @@ public class EnemyManager : MonoBehaviour
             x = -13.9f + 1.266f * (count + missCount/2);
             y = -7.6f + 0.76f * (count + missCount/2);
             transform.position = new Vector2(x, y);
+        }
+
+        if (missCount == 8) {
+            SceneManager.LoadScene("gameover");
         }
     }
 

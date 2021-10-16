@@ -253,6 +253,7 @@ public class BlockReader : MonoBehaviour
         if (missTime) {
             //Debug.Log("Miss!");
             isMiss = true;
+            player.MissAnimation();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
@@ -292,6 +293,7 @@ public class BlockReader : MonoBehaviour
         if (missTime) {
             //Debug.Log("Miss!");
             isMiss = true;
+            player.MissAnimation();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
 
