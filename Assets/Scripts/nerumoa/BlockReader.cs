@@ -256,7 +256,6 @@ public class BlockReader : MonoBehaviour
             player.MissAnimation();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
             return;
@@ -296,8 +295,6 @@ public class BlockReader : MonoBehaviour
             player.MissAnimation();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
-
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
             GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
             return;
