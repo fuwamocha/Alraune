@@ -78,10 +78,10 @@ public class EnemyManager : MonoBehaviour
         missCount++;
         BlockReader.isMiss = false;
 
-        if (missCount % 2 == 0) {
+        if (missCount % 3 == 0) {
             xSpeed = 0f;
-            x = -13.9f + 1.266f * (count + missCount/2);
-            y = -7.6f + 0.76f * (count + missCount/2);
+            x = -13.9f + 1.266f * (count + missCount/3);
+            y = -7.6f + 0.76f * (count + missCount/3);
             transform.position = new Vector2(x, y);
         }
 
