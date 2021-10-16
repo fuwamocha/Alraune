@@ -7,6 +7,8 @@ public class ComboSystem : MonoBehaviour
 {
     public int ComboCount;
     public bool call = false;
+    public int maxComboCount;
+
     Text combotext;
 
     void Start()
@@ -15,20 +17,28 @@ public class ComboSystem : MonoBehaviour
         this.combotext.text = ComboCount.ToString();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
-        if (ComboCount >= 0 && call == false)
+        if (ComboCount >= maxComboCount)
         {
-            call = true;
-            GameObject.Find("ScoreText").GetComponent<Score>().count = 2;
-            StartCoroutine("Delay");
+            maxComboCount = ComboCount;
         }
     }
 
-    private IEnumerator Delay()
+    public void MaxCombo()
     {
-        yield return new WaitForSeconds(1.0f);
-        call = false;
+        switch (maxComboCount)
+        {
+            case 50:
+                GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
+                break;
+            case 100:
+                GameObject.Find("ScoreText").GetComponent<Score>().AddScore(1000);
+                break;
+            case 200:
+                GameObject.Find("ScoreText").GetComponent<Score>().AddScore(2000);
+                break;
+        }
     }
 
     public void AddCombo(int num)
