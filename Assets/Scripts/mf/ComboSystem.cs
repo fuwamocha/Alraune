@@ -7,7 +7,7 @@ public class ComboSystem : MonoBehaviour
 {
     public int ComboCount;
     public bool call = false;
-    public int maxComboCount;
+    public static int maxComboCount;
 
     Text combotext;
 
