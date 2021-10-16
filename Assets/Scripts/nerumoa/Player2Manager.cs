@@ -47,10 +47,8 @@ public class Player2Manager : MonoBehaviour
         /* 自動ジャンプ処理 */
         if (autoJump && !noJump) {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
-            xSpeed = 6.32515f;
+            xSpeed = 6.33f;
             autoJump = false;
-
-            //transform.Translate(1.265f, 2.0f, 0f);
         } else if (HitGround()) {
             xSpeed = 0f;
         }
@@ -68,6 +66,7 @@ public class Player2Manager : MonoBehaviour
     private void PlayerKeyboard()
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
+            //transform.Translate(1.266f, 0.95f, 0f);
             pressSpace = true;
         }
 

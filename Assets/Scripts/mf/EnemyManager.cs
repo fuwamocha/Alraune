@@ -9,17 +9,20 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
 
-    public RaycastHit2D hit;
+    public bool noJump = false;     // ジャンプのオン/オフ切り替え用
 
+    private int count = 0;
+    private int missCount = 0;
+    private float x;
+    private float y;
+    private float xLocal;
     private float xSpeed;
-    //private float jumpPower = 950f;
+  　private float jumpPower = 800f;
     private bool autoJump = false;
     private Animator animator;
     private Rigidbody2D rb;
     private Vector2 vector;
-
-
-    public bool noJump = false;     // デバッグ用
+    private RaycastHit2D hit;
 
     private void Start()
     {
@@ -29,22 +32,29 @@ public class EnemyManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (xSpeed != 0)
-        {
-            transform.localScale = new Vector2(xSpeed * 0.8f, 0.8f);
+        /* アラウルネの向き */
+        xLocal = Mathf.Sign(transform.localScale.x);
+        transform.localScale = new Vector2(xLocal * 0.6f, 0.6f);
+
+        /* 自動ジャンプ処理 */
+        if (autoJump && !noJump) {
+            count++;
+            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
+            xSpeed = 5.755f;
+            autoJump = false;
+        } else if (HitGround()) {
+            xSpeed = 0f;
+        }
+
+        /* ワープ処理 */
+        if (BlockReader.isMiss) {
+            Warp();
         }
 
         /* 移動処理 */
-        vector.x = xSpeed * 5f;
+        vector.x = xSpeed * xLocal;
         vector.y = rb.velocity.y;
         rb.velocity = vector;
-
-        /* 自動ジャンプ処理 */
-        if (autoJump && !noJump)
-        {
-            transform.Translate(1.265f, 2.0f, 0f);
-            autoJump = false;
-        }
     }
 
     /// <summary>
@@ -62,15 +72,21 @@ public class EnemyManager : MonoBehaviour
         return hit;
     }
 
-    public void RythemAnim()
+    public void Warp()
     {
-        // できれば PlayerAnimation関数 と統合
-        animator.SetTrigger("Rythem");
+        missCount++;
+        BlockReader.isMiss = false;
+
+        if (missCount % 2 == 0) {
+            xSpeed = 0f;
+            x = -13.9f + 1.266f * (count + missCount/2);
+            y = -7.6f + 0.76f * (count + missCount/2);
+            transform.position = new Vector2(x, y);
+        }
     }
 
     public void AutoJump()
     {
         autoJump = true;
     }
-
 }

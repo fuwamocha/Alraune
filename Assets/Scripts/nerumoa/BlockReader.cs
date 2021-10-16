@@ -37,9 +37,9 @@ public class BlockReader : MonoBehaviour
     private bool cooldown2;
     private string hitBlock;
     private RaycastHit2D _hit;
-
-
     private AudioSource audio;      // 仮SE
+
+    public static bool isMiss;
 
     private enum Block
     {
@@ -49,7 +49,8 @@ public class BlockReader : MonoBehaviour
         CROSSUP,
         CROSSDOWN,
         CROSSLEFT,
-        CROSSRIGHT
+        CROSSRIGHT,
+        NONE
     }
 
     private Block block;
@@ -101,6 +102,8 @@ public class BlockReader : MonoBehaviour
             block = Block.CROSSLEFT;
         } else if (hitBlock == "CrossRight") {
             block = Block.CROSSRIGHT;
+        } else if (hitBlock == "None") {
+            block = Block.NONE;
         }
     }
 
@@ -229,6 +232,9 @@ public class BlockReader : MonoBehaviour
                     JudgeSpace();
                 }
                 break;
+
+            case Block.NONE:
+                break;
         }
 
         player.pressSpace = false;
@@ -246,7 +252,7 @@ public class BlockReader : MonoBehaviour
         JudgeTime();
         if (missTime) {
             //Debug.Log("Miss!");
-            if (block == Block.TWICE) Debug.Log(_elaspedTime);
+            isMiss = true;
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ScoreText").GetComponent<Score>().AddScore(10);
@@ -285,6 +291,7 @@ public class BlockReader : MonoBehaviour
 
         if (missTime) {
             //Debug.Log("Miss!");
+            isMiss = true;
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
 
@@ -366,12 +373,6 @@ public class BlockReader : MonoBehaviour
             cooldown = false;
         }
 
-
-        // twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime がダメ説ある
-        // block.TWICEに乗っている時且つ、　？？？？？
-        // missした時間を表記するように
-        // % 余り表記してもいいかも
-
         /* TWICEブロックの更新 */
         if (block == Block.TWICE && twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime) {
             if (!cooldown2) {
@@ -397,5 +398,4 @@ public class BlockReader : MonoBehaviour
         pressCooldown = false;
         wrongKey = false;
     }
-
 }
