@@ -17,4 +17,10 @@ public class DebugTime : MonoBehaviour
             timeText.text += "sec";
         }
     }
+
+    public void Flush()
+    {
+        timeText.text = rythem.aTime.ToString("N9");
+        timeText.text += "sec";
+    }
 }

@@ -52,7 +52,7 @@ public class BlockReader : MonoBehaviour
         CROSSRIGHT,
         NONE
     }
-
+    
     private Block block;
 
     public GameObject playerpos;
@@ -67,7 +67,7 @@ public class BlockReader : MonoBehaviour
         audio = GetComponent<AudioSource>();
 
         bufferTime = bpm170 * 0.70;
-        twiceSTime = bpm170 * 0.20;
+        twiceSTime = bpm170 * 0.15;
         twiceETime = bpm170 * 0.25;
     }
 
