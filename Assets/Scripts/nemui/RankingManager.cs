@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunkingManager : MonoBehaviour
+public class RankingManager : MonoBehaviour
 {
     private int _maxCombo = 0;
     private int _hiScore = 0;
