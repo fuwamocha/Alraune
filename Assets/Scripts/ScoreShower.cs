@@ -14,12 +14,5 @@ public class ScoreShower : MonoBehaviour
         resultScore = PlayerPrefs.GetInt("SCORE");
 
         scoreText.text = resultScore.ToString("000000");
-        Debug.Log("得点：" + resultScore);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MaxCombo : MonoBehaviour
 {
     Text textComponent;
-    private int Count = ComboSystem.maxComboCount;
+    public static int Count = ComboSystem.maxComboCount;
 
     void Start()
     {

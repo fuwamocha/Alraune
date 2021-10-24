@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] LayerMask groundLayer = default;
 
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
+    public static bool isNotClear = false;
 
     private int count = 0;
     private int missCount = 0;
@@ -86,6 +87,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         if (missCount == 12) {
+            isNotClear = true;
             SceneManager.LoadScene("gameover");
         }
     }
