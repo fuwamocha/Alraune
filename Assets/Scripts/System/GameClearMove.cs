@@ -5,24 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameClearMove : MonoBehaviour
 {
+    [SerializeField] private string _sceneName;
     public static bool isClear = false;
+    private string  _playerTag = "Player";
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    void OnTriggerEnter2D (Collider2D col)
+    void OnTriggerEnter2D (Collider2D other)
 	{
-		if (col.gameObject.tag == "Player") {
+		if (other.tag == _playerTag) {
             isClear = true;
-			SceneManager.LoadScene ("GameClear");
+			SceneManager.LoadScene (_sceneName);
 		}
 	}
 }
