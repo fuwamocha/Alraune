@@ -745,7 +745,7 @@ MonoBehaviour:
   - {fileID: 970469976}
   - {fileID: 1301510597}
   sceneName:
-  - Start
+  - Main
   - Credit
   - Exit
   - MusicRoom
