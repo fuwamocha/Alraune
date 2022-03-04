@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
     }
 
     private void Update() {
-        if(GameClearMove.isClear || EnemyManager.isNotClear){
+        if(MoveClearScene.isClear || EnemyManager.isNotClear){
            PlayerPrefs.SetInt("SCORE", score);
         PlayerPrefs.Save();
        }    

@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
     public static bool isNotClear = false;
 
+    private string _gameOverSceneName = "GameOver";
     private int count = 0;
     private int missCount = 0;
     private float x;
@@ -88,7 +89,7 @@ public class EnemyManager : MonoBehaviour
 
         if (missCount == 12) {
             isNotClear = true;
-            SceneManager.LoadScene("gameover");
+            SceneManager.LoadScene(_gameOverSceneName);
         }
     }
 

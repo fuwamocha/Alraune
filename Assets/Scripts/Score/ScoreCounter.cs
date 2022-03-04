@@ -11,35 +11,31 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] PlayerManager playerManager = default;
 
     private int totalScore = 0;
-    
+
     public Text scoreText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (StickManager.isPerfect) {
+        if (StickManager.isPerfect)
+        {
             playerManager.Shan();           //
             totalScore += perfectScore;
             StickManager.isPerfect = false;
         }
 
-        if (StickManager.isSuccess) {
+        if (StickManager.isSuccess)
+        {
             totalScore += successScore;
             StickManager.isSuccess = false;
         }
 
-        
-       scoreText.text = totalScore.ToString("000000");
 
-       if(GameClearMove.isClear){
-           PlayerPrefs.SetInt("SCORE", totalScore);
-        PlayerPrefs.Save();
-       }
+        scoreText.text = totalScore.ToString("000000");
+
+        if (MoveClearScene.isClear)
+        {
+            PlayerPrefs.SetInt("SCORE", totalScore);
+            PlayerPrefs.Save();
+        }
     }
 }
