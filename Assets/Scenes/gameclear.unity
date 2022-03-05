@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 231290922}
   - component: {fileID: 231290921}
   m_Layer: 0
-  m_Name: BGM
+  m_Name: AudioPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ AudioSource:
   m_GameObject: {fileID: 231290920}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5807857309004364319, guid: 4f946c0b26a8874448627f8144a35069, type: 2}
+  OutputAudioMixerGroup: {fileID: -4811765650601535434, guid: 4f946c0b26a8874448627f8144a35069, type: 2}
   m_audioClip: {fileID: 8300000, guid: b240eebc183e1aa4d829de0454a2bf60, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.03
@@ -248,7 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267846683
 GameObject:
@@ -842,7 +842,7 @@ RectTransform:
   - {fileID: 279314744}
   - {fileID: 774907557}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
