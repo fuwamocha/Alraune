@@ -400,7 +400,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -849,7 +849,6 @@ MonoBehaviour:
   - {fileID: 227100623}
   - {fileID: 1274095591}
   - {fileID: 970469976}
-  - {fileID: 0}
   sceneName:
   - Main
   - Credit
