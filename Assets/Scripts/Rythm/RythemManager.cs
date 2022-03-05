@@ -1,42 +1,42 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ‹È‚ÆƒŠƒYƒ€‚Ì“¯Šú‚ğs‚¤ƒNƒ‰ƒX
+/// æ›²ã¨ãƒªã‚ºãƒ ã®åŒæœŸã‚’è¡Œã†ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class RythemManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] BGM = default;
-    [SerializeField] GameObject BGMs = default;
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] Player2Manager player = default;
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
 
-    public double totalTime = 0d;           // ƒg[ƒ^ƒ‹Œo‰ßŠÔ (sec)
+    public double totalTime = 0d;           // ãƒˆãƒ¼ã‚¿ãƒ«çµŒéæ™‚é–“ (sec)
 
-    private int count = 0;                  // BGMØ‚è‘Ö‚¦—p
-    private double elaspedTime;             // 1‰ñ–ˆ‚ÌŒo‰ßŠÔ (sec)
-    private double bufferTime;              // ŠÉÕŠÔ (ƒ^ƒCƒ~ƒ“ƒO‚Ì“¯Šú—p)
-    private double justTime;                // ŠÔ’²®—p
+    private int count = 0;                  // BGMåˆ‡ã‚Šæ›¿ãˆç”¨
+    private double elaspedTime;             // 1å›æ¯ã®çµŒéæ™‚é–“ (sec)
+    private double bufferTime;              // ç·©è¡æ™‚é–“ (ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã®åŒæœŸç”¨)
+    private double justTime;                // æ™‚é–“èª¿æ•´ç”¨
     private double bpm170 = 120 / 170d;
-    private bool cooldown = false;          // ˜A‘±Às‚Ì–h~—p
-    private AudioSource audio_BGM;
+    private bool cooldown = false;          // é€£ç¶šå®Ÿè¡Œã®é˜²æ­¢ç”¨
 
-    public double aTime;        // ƒfƒoƒbƒO—p
+
+    public double aTime;         // ãƒ‡ãƒãƒƒã‚°ç”¨
 
     private void Start()
     {
-        audio_BGM = BGMs.GetComponent<AudioSource>();   // BGM‚ÌŠÇ—
-        audio_BGM.clip = BGM[0];
-        audio_BGM.Play();
+        _audioSource = _audioSource.GetComponent<AudioSource>();   // BGMã®ç®¡ç†
+        _audioSource.clip = BGM[0];
+        _audioSource.Play();
 
         bufferTime = bpm170 * 0.92;
     }
 
     private void FixedUpdate()
     {
-        totalTime = audio_BGM.time;
+        totalTime = _audioSource.time;
         elaspedTime = totalTime % bpm170;
 
         GetRightTiming();
@@ -45,19 +45,23 @@ public class RythemManager : MonoBehaviour
 
 
     /// <summary>
-    /// “K³ƒ^ƒCƒ~ƒ“ƒO‚ÌZoEÀs
+    /// é©æ­£ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã®ç®—å‡ºãƒ»å®Ÿè¡Œ
     /// </summary>
     private void GetRightTiming()
     {
-        if (elaspedTime >= bufferTime) {
-            if (!cooldown) {
+        if (elaspedTime >= bufferTime)
+        {
+            if (!cooldown)
+            {
                 justTime = bpm170 - elaspedTime;
                 Invoke("JustTiming", (float)justTime);
                 cooldown = true;
 
-                aTime = totalTime + (bpm170 - elaspedTime);     // ƒfƒoƒbƒO—p (‹È‚ÌŒo‰ßŠÔ)
+                aTime = totalTime + (bpm170 - elaspedTime);     // ãƒ‡ãƒãƒƒã‚°ç”¨ (æ›²ã®çµŒéæ™‚é–“)
             }
-        } else if (cooldown) {
+        }
+        else if (cooldown)
+        {
             cooldown = false;
         }
     }
@@ -66,9 +70,11 @@ public class RythemManager : MonoBehaviour
     {
         CallAutoJump();
 
-        if (audio_BGM.clip == BGM[0]) {
+        if (_audioSource.clip == BGM[0])
+        {
             count++;
-            if (count == 4) {
+            if (count == 4)
+            {
                 ChangeBGM();
             }
         }
@@ -82,7 +88,7 @@ public class RythemManager : MonoBehaviour
 
     private void ChangeBGM()
     {
-        audio_BGM.clip = BGM[1];
-        audio_BGM.Play();
+        _audioSource.clip = BGM[1];
+        _audioSource.Play();
     }
 }
