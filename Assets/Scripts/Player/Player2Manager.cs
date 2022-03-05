@@ -8,7 +8,8 @@ using UnityEngine;
 public class Player2Manager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
-
+    [SerializeField] private AudioClip _inputAudioClip;
+    [SerializeField] private AudioSource _audioSource;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
 
     public bool pressSpace = false;
@@ -20,7 +21,7 @@ public class Player2Manager : MonoBehaviour
 
     private float xLocal;
     private float xSpeed;
-  　private float jumpPower = 750f;
+    private float jumpPower = 750f;
     private bool autoJump = false;
     private bool missAnim = false;
     private Animator animator;
@@ -29,6 +30,8 @@ public class Player2Manager : MonoBehaviour
 
     private void Start()
     {
+        _audioSource = _audioSource.GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -46,11 +49,14 @@ public class Player2Manager : MonoBehaviour
         transform.localScale = new Vector2(xLocal * 0.8f, 0.8f);
 
         /* 自動ジャンプ処理 */
-        if (autoJump && !noJump) {
+        if (autoJump && !noJump)
+        {
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
             xSpeed = 6.33f;
             autoJump = false;
-        } else if (HitGround()) {
+        }
+        else if (HitGround())
+        {
             xSpeed = 0f;
         }
 
@@ -66,22 +72,32 @@ public class Player2Manager : MonoBehaviour
     /// </summary>
     private void PlayerKeyboard()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             pressSpace = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            upArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            downArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            leftArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            rightArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            upArrow = true;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            downArrow = true;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            leftArrow = true;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            rightArrow = true;
-        }
     }
 
     /// <summary>
@@ -91,13 +107,17 @@ public class Player2Manager : MonoBehaviour
     {
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
 
-        if (HitGround() && animator.GetBool("Jump")) {
+        if (HitGround() && animator.GetBool("Jump"))
+        {
             animator.SetBool("Jump", false);
-        } else if (!HitGround() && !animator.GetBool("Jump")) {
+        }
+        else if (!HitGround() && !animator.GetBool("Jump"))
+        {
             animator.SetBool("Jump", true);
         }
 
-        if (missAnim) {
+        if (missAnim)
+        {
             animator.SetTrigger("Miss");
             missAnim = false;
         }
