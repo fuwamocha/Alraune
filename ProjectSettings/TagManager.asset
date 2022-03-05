@@ -19,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
+  - PopScore
   - 
   - 
   - 
@@ -47,4 +47,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PopScore
+    uniqueID: 2859335059
     locked: 0
