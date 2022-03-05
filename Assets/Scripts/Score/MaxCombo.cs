@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class MaxCombo : MonoBehaviour
 {
-    Text textComponent;
     public static int Count = ComboSystem.maxComboCount;
+    private Text _textComponent;
 
     void Start()
     {
-        this.textComponent = GameObject.Find("Text").GetComponent<Text>();
-        this.textComponent.text = Count.ToString();
+        _textComponent = this.GetComponent<Text>();
+        _textComponent.text = Count.ToString();
     }
 
 }
