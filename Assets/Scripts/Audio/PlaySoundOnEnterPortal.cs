@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayEnterPortalSound : MonoBehaviour
+public class PlaySoundOnEnterPortal : MonoBehaviour
 {
     [SerializeField] private AudioClip _enterPortalAudioClip;
     private AudioSource _enterPortalAudioSource;
