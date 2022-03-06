@@ -1265,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RunkingManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6768546287858297648, guid: a53be3d3aeb46ef4086660e4466ec15b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6768546287858297649, guid: a53be3d3aeb46ef4086660e4466ec15b, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1463,6 +1467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RankingLoader
       objectReference: {fileID: 0}
+    - target: {fileID: 1712139114035474, guid: ee393f04960d94baeaf854699b2ae1e3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4817098320978224, guid: ee393f04960d94baeaf854699b2ae1e3, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1564,6 +1572,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NCMBManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5254267087061080188, guid: 7ba1d4c329c611741a4a74cd4c1beb3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ba1d4c329c611741a4a74cd4c1beb3b, type: 3}
 --- !u!1001 &2162804279592931359
@@ -1620,6 +1632,10 @@ PrefabInstance:
     - target: {fileID: 2384771242541819429, guid: 510e05ed7673ffc43b90343d71cae18f, type: 3}
       propertyPath: m_Name
       value: NCMBSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384771242541819429, guid: 510e05ed7673ffc43b90343d71cae18f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 510e05ed7673ffc43b90343d71cae18f, type: 3}
