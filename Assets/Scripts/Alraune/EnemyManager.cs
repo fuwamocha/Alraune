@@ -30,8 +30,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        _player2Manager = _player2Manager.GetComponent<Player2Manager>();
-
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -95,7 +93,7 @@ public class EnemyManager : MonoBehaviour
             transform.position = new Vector2(x, y);
         }
 
-        if (missCount == _player2Manager.hp)
+        if (_player2Manager.Hp.Value <= 0)
         {
             isNotClear = true;
             SceneManager.LoadScene(_gameOverSceneName);

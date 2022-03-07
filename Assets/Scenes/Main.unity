@@ -2141,7 +2141,7 @@ GameObject:
   - component: {fileID: 1813698295}
   - component: {fileID: 1813698294}
   m_Layer: 5
-  m_Name: Image
+  m_Name: LifeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2259,6 +2259,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _player2Manager: {fileID: 659298062}
   noJump: 0
 --- !u!61 &1906341146
 BoxCollider2D:
@@ -2346,7 +2347,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 541e6d7b291ad0147967ee8b0e5c2485, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2572,6 +2573,7 @@ GameObject:
   - component: {fileID: 2035444851}
   - component: {fileID: 2035444853}
   - component: {fileID: 2035444852}
+  - component: {fileID: 2035444854}
   m_Layer: 5
   m_Name: LifeText
   m_TagString: Untagged
@@ -2631,7 +2633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00
+  m_Text: 12
 --- !u!222 &2035444853
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2640,6 +2642,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035444850}
   m_CullTransparentMesh: 1
+--- !u!114 &2035444854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035444850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ec57898c2eef0469e1351455229044, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player2Manager: {fileID: 659298062}
+  _enemyManager: {fileID: 1906341145}
 --- !u!1 &2107816538
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,7 @@ public class Player2Manager : MonoBehaviour
     [SerializeField] private AudioClip _inputAudioClip;
     [SerializeField] private AudioSource _audioSource;
 
-    public int hp { get; private set; } = 12;
+    public IReadOnlyReactiveProperty<int> Hp => _hp;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
 
     public bool pressSpace = false;
@@ -22,6 +23,7 @@ public class Player2Manager : MonoBehaviour
     public RaycastHit2D hit;
 
 
+    private readonly ReactiveProperty<int> _hp = new ReactiveProperty<int>(12);
     private float xLocal;
     private float xSpeed;
     private float jumpPower = 750f;
@@ -37,6 +39,8 @@ public class Player2Manager : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        _hp.AddTo(this);
     }
 
     private void Update()
@@ -121,6 +125,7 @@ public class Player2Manager : MonoBehaviour
 
         if (missAnim)
         {
+
             animator.SetTrigger("Miss");
             missAnim = false;
         }
@@ -133,6 +138,11 @@ public class Player2Manager : MonoBehaviour
     public void MissAnimation()
     {
         missAnim = true;
+    }
+
+    public void ReduceHP()
+    {
+        _hp.Value--;
     }
 
     /// <summary>

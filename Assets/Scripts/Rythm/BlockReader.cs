@@ -312,6 +312,7 @@ public class BlockReader : MonoBehaviour
             //Debug.Log("Miss!");
             isMiss = true;
             player.MissAnimation();
+            player.ReduceHP();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
@@ -358,6 +359,7 @@ public class BlockReader : MonoBehaviour
             //Debug.Log("Miss!");
             isMiss = true;
             player.MissAnimation();
+            player.ReduceHP();
             Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
 
             GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
