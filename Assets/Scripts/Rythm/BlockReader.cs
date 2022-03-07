@@ -13,8 +13,8 @@ public class BlockReader : MonoBehaviour
     [SerializeField] private GameObject _goodObj;
     [SerializeField] private GameObject _missObj;
     [SerializeField] Player2Manager player = default;
-    [SerializeField] ComboSystem _comboSystem;
-    [SerializeField] Score _score;
+    [SerializeField] ComboCounter _combo;
+    [SerializeField] ScoreCounter _score;
 
     private int timerNum;
     private double bpm170 = 120 / 170d; // ä÷êîÇ™ïKóvÅH
@@ -63,8 +63,8 @@ public class BlockReader : MonoBehaviour
 
     private void Start()
     {
-        _comboSystem = _comboSystem.GetComponent<ComboSystem>();
-        _score = _score.GetComponent<Score>();
+        _combo = _combo.GetComponent<ComboCounter>();
+        _score = _score.GetComponent<ScoreCounter>();
 
         pressArrows = player.upArrow || player.downArrow || player.leftArrow || player.rightArrow;
         bufferTime = bpm170 * 0.70;
@@ -305,8 +305,8 @@ public class BlockReader : MonoBehaviour
         player.ReduceHP();
         Instantiate(_missObj, playerpos.transform.position, Quaternion.identity);
 
-        _comboSystem.ComboCount = 0;
-        _comboSystem.AddCombo(0);
+        _combo.ResetCombo();
+        _combo.AddCombo(0);
     }
 
     private void Success(GameObject timing, int score)
@@ -314,7 +314,7 @@ public class BlockReader : MonoBehaviour
         Instantiate(timing, playerpos.transform.position, Quaternion.identity);
 
         _score.AddScore(score);
-        _comboSystem.AddCombo(1);
+        _combo.AddCombo(1);
     }
 
     private void JudgeTime()
