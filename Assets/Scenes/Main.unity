@@ -1168,8 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b253d6bdc7f3f044e9edc023db447de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: {x: 0.5, y: 0.5, z: 0.5}
-  timeb: 0
+  _rhythmManager: {fileID: 950959953}
 --- !u!212 &669729201
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1464,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3617735559777305275, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
       propertyPath: m_Name
-      value: Rythem Manager
+      value: Rhythm Manager
       objectReference: {fileID: 0}
     - target: {fileID: 3617735559777305277, guid: 8037d86abdc4d2e42ae89d8db6f759c4, type: 3}
       propertyPath: BGM
@@ -1522,7 +1521,8 @@ MonoBehaviour:
   player: {fileID: 659298062}
   enemy: {fileID: 1906341145}
   block: {fileID: 502029067}
-  totalTime: 0
+  elaspedTime: 0
+  justTime: 0
   aTime: 0
 --- !u!1 &1010397923
 GameObject:
@@ -2022,7 +2022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10206bcbfc17f4c43b1b06f166f06477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rythem: {fileID: 950959953}
+  rhythm: {fileID: 0}
   timeText: {fileID: 1748373975}
   isChecked: 1
 --- !u!114 &1748373975
