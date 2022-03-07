@@ -10,6 +10,8 @@ public class Player2Manager : MonoBehaviour
     [SerializeField] LayerMask groundLayer = default;
     [SerializeField] private AudioClip _inputAudioClip;
     [SerializeField] private AudioSource _audioSource;
+
+    public int hp { get; private set; } = 12;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
 
     public bool pressSpace = false;
@@ -18,6 +20,7 @@ public class Player2Manager : MonoBehaviour
     public bool leftArrow = false;
     public bool rightArrow = false;
     public RaycastHit2D hit;
+
 
     private float xLocal;
     private float xSpeed;

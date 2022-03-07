@@ -4,23 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ƒvƒŒƒCƒ„[‚Ì“®ì‚ÉŠÖ‚·‚éƒNƒ‰ƒX
+/// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ä½œã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
+    [SerializeField] Player2Manager _player2Manager;
 
-    public bool noJump = false;     // ƒWƒƒƒ“ƒv‚ÌƒIƒ“/ƒIƒtØ‚è‘Ö‚¦—p
+    public int missCount { get; private set; } = 0;
+    public bool noJump = false;     // ã‚¸ãƒ£ãƒ³ãƒ—ã®ã‚ªãƒ³/ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆç”¨
     public static bool isNotClear = false;
 
     private string _gameOverSceneName = "GameOver";
     private int count = 0;
-    private int missCount = 0;
     private float x;
     private float y;
     private float xLocal;
     private float xSpeed;
-  @private float jumpPower = 800f;
+    private float jumpPower = 800f;
     private bool autoJump = false;
     private Animator animator;
     private Rigidbody2D rb;
@@ -29,45 +30,51 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        _player2Manager = _player2Manager.GetComponent<Player2Manager>();
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        /* ƒAƒ‰ƒEƒ‹ƒl‚ÌŒü‚« */
+        /* ã‚¢ãƒ«ãƒ©ã‚¦ãƒã®å‘ã */
         xLocal = Mathf.Sign(transform.localScale.x);
         transform.localScale = new Vector2(xLocal * 0.6f, 0.6f);
 
-        /* ©“®ƒWƒƒƒ“ƒvˆ— */
-        if (autoJump && !noJump) {
+        /* è‡ªå‹•ã‚¸ãƒ£ãƒ³ãƒ—å‡¦ç† */
+        if (autoJump && !noJump)
+        {
             count++;
             rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
             xSpeed = 5.755f;
             autoJump = false;
-        } else if (HitGround()) {
+        }
+        else if (HitGround())
+        {
             xSpeed = 0f;
         }
 
-        /* ƒ[ƒvˆ— */
-        if (BlockReader.isMiss) {
+        /* ãƒ¯ãƒ¼ãƒ—å‡¦ç† */
+        if (BlockReader.isMiss)
+        {
             Warp();
         }
 
-        /* ˆÚ“®ˆ— */
+        /* ç§»å‹•å‡¦ç† */
         vector.x = xSpeed * xLocal;
         vector.y = rb.velocity.y;
         rb.velocity = vector;
     }
 
     /// <summary>
-    /// Ú’n”»’è‚Ìæ“¾
+    /// æ¥åœ°åˆ¤å®šã®å–å¾—
     /// </summary>
     private bool HitGround()
     {
-        Debug.DrawLine(transform.position - transform.up * 1.15f,   // ƒfƒoƒbƒO—p
-                    @ transform.position - transform.up * 1.30f,
-                       Color.red);
+        Debug.DrawLine(transform.position - transform.up * 1.15f,   // ãƒ‡ãƒãƒƒã‚°ç”¨
+                        transform.position - transform.up * 1.30f,
+                        Color.red);
 
         hit = Physics2D.Linecast(transform.position - transform.up * 1.15f,
                                  transform.position - transform.up * 1.30f,
@@ -80,14 +87,16 @@ public class EnemyManager : MonoBehaviour
         missCount++;
         BlockReader.isMiss = false;
 
-        if (missCount % 3 == 0) {
+        if (missCount % 3 == 0)
+        {
             xSpeed = 0f;
-            x = -13.9f + 1.266f * (count + missCount/3);
-            y = -7.6f + 0.76f * (count + missCount/3);
+            x = -13.9f + 1.266f * (count + missCount / 3);
+            y = -7.6f + 0.76f * (count + missCount / 3);
             transform.position = new Vector2(x, y);
         }
 
-        if (missCount == 12) {
+        if (missCount == _player2Manager.hp)
+        {
             isNotClear = true;
             SceneManager.LoadScene(_gameOverSceneName);
         }
