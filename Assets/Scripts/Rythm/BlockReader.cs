@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// ƒuƒƒbƒN‚Ìí—Ş‚ğ“Ç‚İæ‚èA‘Î‰‚µ‚½“®ì‚ğs‚í‚¹‚éƒNƒ‰ƒX
+/// ãƒ–ãƒ­ãƒƒã‚¯ã®ç¨®é¡ã‚’èª­ã¿å–ã‚Šã€å¯¾å¿œã—ãŸå‹•ä½œã‚’è¡Œã‚ã›ã‚‹ã‚¯ãƒ©ã‚¹
 /// </summary>
 public class BlockReader : MonoBehaviour
 {
@@ -17,9 +17,9 @@ public class BlockReader : MonoBehaviour
     [SerializeField] ScoreCounter _score;
 
     private int timerNum;
-    private double bpm170 = 120 / 170d; // ŠÖ”‚ª•K—vH
+    private double bpm170 = 120 / 170d; // é–¢æ•°ãŒå¿…è¦ï¼Ÿ
     private double canSpaceTime;
-    private double cantSpaceTime;      // ‰Ÿ‚³‚È‚¢ƒuƒƒbƒN—pH
+    private double cantSpaceTime;      // æŠ¼ã•ãªã„ãƒ–ãƒ­ãƒƒã‚¯ç”¨ï¼Ÿ
     private double goodStartTime;
     private double goodEndTime;
     private double greatStartTime;
@@ -80,7 +80,7 @@ public class BlockReader : MonoBehaviour
 
 
     /// <summary>
-    /// ƒuƒƒbƒN‚Ìí—Ş‚ğ“Ç‚İæ‚é
+    /// ãƒ–ãƒ­ãƒƒã‚¯ã®ç¨®é¡ã‚’èª­ã¿å–ã‚‹
     /// </summary>
     private void ReadBlock()
     {
@@ -125,7 +125,7 @@ public class BlockReader : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒy[ƒX‚ÆƒŠƒYƒ€‚Ì“¯Šúˆ—
+    /// ã‚¹ãƒšãƒ¼ã‚¹ã¨ãƒªã‚ºãƒ ã®åŒæœŸå‡¦ç†
     /// </summary>
     private void PressSpace()
     {
@@ -254,7 +254,7 @@ public class BlockReader : MonoBehaviour
     }
 
     /// <summary>
-    /// ƒXƒy[ƒX‚Ìƒ^ƒCƒ~ƒ“ƒO”»’èˆ—
+    /// ã‚¹ãƒšãƒ¼ã‚¹ã®ã‚¿ã‚¤ãƒŸãƒ³ã‚°åˆ¤å®šå‡¦ç†
     /// </summary>
 
     private void JudgeSpace()
@@ -336,7 +336,7 @@ public class BlockReader : MonoBehaviour
     }
 
     /// <summary>
-    /// BlockReaderƒNƒ‰ƒX‚Åˆµ‚¦‚éƒ[ƒJƒ‹•Ï”‚É•ÏŠ·
+    /// BlockReaderã‚¯ãƒ©ã‚¹ã§æ‰±ãˆã‚‹ãƒ­ãƒ¼ã‚«ãƒ«å¤‰æ•°ã«å¤‰æ›
     /// </summary>
     public void ConvertLocal(double elaspedTime)
     {
@@ -348,7 +348,7 @@ public class BlockReader : MonoBehaviour
     {
         timerNum = 1;
         canSpaceTime = bpm170 * 0.72;
-        cantSpaceTime = bpm170 * 0.22;      // ‰Ÿ‚³‚È‚¢ƒuƒƒbƒN—pH
+        cantSpaceTime = bpm170 * 0.22;      // æŠ¼ã•ãªã„ãƒ–ãƒ­ãƒƒã‚¯ç”¨ï¼Ÿ
         goodStartTime = bpm170 * 0.85;
         goodEndTime = bpm170 * 0.15;
         greatStartTime = bpm170 * 0.92;
@@ -361,7 +361,7 @@ public class BlockReader : MonoBehaviour
     {
         timerNum = 2;
         canSpaceTime = bpm170 * 0.22;
-        cantSpaceTime = bpm170 * 0.72;      // ‰Ÿ‚³‚È‚¢ƒuƒƒbƒN—pH
+        cantSpaceTime = bpm170 * 0.72;      // æŠ¼ã•ãªã„ãƒ–ãƒ­ãƒƒã‚¯ç”¨ï¼Ÿ
         goodStartTime = bpm170 * 0.35;
         goodEndTime = bpm170 * 0.65;
         greatStartTime = bpm170 * 0.42;
@@ -372,7 +372,7 @@ public class BlockReader : MonoBehaviour
 
     private void CheckTiming()
     {
-        /* ƒuƒƒbƒN‚ÌXV */
+        /* ãƒ–ãƒ­ãƒƒã‚¯ã®æ›´æ–° */
         if (_leashedTime >= bufferTime)
         {
             if (!cooldown)
@@ -387,7 +387,7 @@ public class BlockReader : MonoBehaviour
             cooldown = false;
         }
 
-        /* TWICEƒuƒƒbƒN‚ÌXV */
+        /* TWICEãƒ–ãƒ­ãƒƒã‚¯ã®æ›´æ–° */
         if (block == Block.TWICE && twiceSTime <= _leashedTime && _leashedTime <= twiceETime)
         {
             if (!cooldown2)
