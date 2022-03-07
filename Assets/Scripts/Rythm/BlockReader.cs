@@ -26,7 +26,7 @@ public class BlockReader : MonoBehaviour
     private double greatEndTime;
     private double exStartTime;
     private double exEndTime;
-    private double _elaspedTime = 0d;
+    private double _leashedTime = 0d;
     private double bufferTime;
     private double twiceSTime;
     private double twiceETime;
@@ -37,7 +37,7 @@ public class BlockReader : MonoBehaviour
     private bool exTime;
     private bool pressCooldown = true;
     private bool wrongKey = false;
-    private bool pressArrow;
+    private bool pressArrows;
     private bool cooldown;
     private bool cooldown2;
     private string hitBlock;
@@ -66,6 +66,7 @@ public class BlockReader : MonoBehaviour
         _comboSystem = _comboSystem.GetComponent<ComboSystem>();
         _score = _score.GetComponent<Score>();
 
+        pressArrows = player.upArrow || player.downArrow || player.leftArrow || player.rightArrow;
         bufferTime = bpm170 * 0.70;
         twiceSTime = bpm170 * 0.15;
         twiceETime = bpm170 * 0.25;
@@ -132,42 +133,18 @@ public class BlockReader : MonoBehaviour
         {
             case Block.NORMAL:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                {
-                    if (player.pressSpace && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
-                }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
-                {
-                    pressCooldown = true;
-                    JudgeSpace();
-                }
+                Check(0.4);
                 break;
 
             case Block.TWICE:
 
                 if (timerNum == 1)
                 {
-                    if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                    {
-                        if (player.pressSpace && !pressCooldown)
-                        {
-                            pressCooldown = true;
-                            JudgeSpace();
-                        }
-                    }
-                    else if (_elaspedTime < bpm170 * 0.25 && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
+                    Check(0.25);
                 }
                 else if (timerNum == 2)
                 {
-                    if (canSpaceTime <= _elaspedTime && _elaspedTime <= goodEndTime)
+                    if (canSpaceTime <= _leashedTime && _leashedTime <= goodEndTime)
                     {
                         if (player.pressSpace && !pressCooldown)
                         {
@@ -175,7 +152,7 @@ public class BlockReader : MonoBehaviour
                             JudgeSpace();
                         }
                     }
-                    else if (_elaspedTime < bpm170 * 0.75 && !pressCooldown)
+                    else if (_leashedTime < bpm170 * 0.75 && !pressCooldown)
                     {
                         pressCooldown = true;
                         JudgeSpace();
@@ -185,16 +162,16 @@ public class BlockReader : MonoBehaviour
 
             case Block.SKIP:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= cantSpaceTime)
+                if (canSpaceTime <= _leashedTime || _leashedTime <= cantSpaceTime)
                 {
-                    pressArrow = player.upArrow || player.downArrow || player.leftArrow || player.rightArrow;
-                    if ((player.pressSpace || pressArrow) && !pressCooldown)
+
+                    if ((player.pressSpace || pressArrows) && !pressCooldown)
                     {
                         pressCooldown = true;
                         JudgeSkip();
                     }
                 }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
+                else if (_leashedTime < bpm170 * 0.4 && !pressCooldown)
                 {
                     pressCooldown = true;
                     JudgeSkip();
@@ -203,94 +180,22 @@ public class BlockReader : MonoBehaviour
 
             case Block.CROSSUP:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                {
-                    if (player.upArrow && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
-                    else if (player.downArrow || player.leftArrow || player.rightArrow)
-                    {
-                        pressCooldown = true;
-                        wrongKey = true;
-                        JudgeSpace();
-                    }
-                }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
-                {
-                    pressCooldown = true;
-                    JudgeSpace();
-                }
+                CheckCross(player.upArrow, player.downArrow, player.leftArrow, player.rightArrow);
                 break;
 
             case Block.CROSSDOWN:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                {
-                    if (player.downArrow && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
-                    else if (player.upArrow || player.leftArrow || player.rightArrow)
-                    {
-                        pressCooldown = true;
-                        wrongKey = true;
-                        JudgeSpace();
-                    }
-                }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
-                {
-                    pressCooldown = true;
-                    JudgeSpace();
-                }
+                CheckCross(player.downArrow, player.upArrow, player.leftArrow, player.rightArrow);
                 break;
 
             case Block.CROSSLEFT:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                {
-                    if (player.leftArrow && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
-                    else if (player.upArrow || player.downArrow || player.rightArrow)
-                    {
-                        pressCooldown = true;
-                        wrongKey = true;
-                        JudgeSpace();
-                    }
-                }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
-                {
-                    pressCooldown = true;
-                    JudgeSpace();
-                }
+                CheckCross(player.leftArrow, player.upArrow, player.downArrow, player.rightArrow);
                 break;
 
             case Block.CROSSRIGHT:
 
-                if (canSpaceTime <= _elaspedTime || _elaspedTime <= goodEndTime)
-                {
-                    if (player.rightArrow && !pressCooldown)
-                    {
-                        pressCooldown = true;
-                        JudgeSpace();
-                    }
-                    else if (player.upArrow || player.downArrow || player.leftArrow)
-                    {
-                        pressCooldown = true;
-                        wrongKey = true;
-                        JudgeSpace();
-                    }
-                }
-                else if (_elaspedTime < bpm170 * 0.4 && !pressCooldown)
-                {
-                    pressCooldown = true;
-                    JudgeSpace();
-                }
+                CheckCross(player.rightArrow, player.upArrow, player.downArrow, player.leftArrow);
                 break;
 
             case Block.NONE:
@@ -302,6 +207,50 @@ public class BlockReader : MonoBehaviour
         player.downArrow = false;
         player.leftArrow = false;
         player.rightArrow = false;
+    }
+
+    private void CheckCross(bool pressArrow, bool otherArrow1, bool otherArrow2, bool otherArrow3)
+    {
+        if (pressCooldown) return;
+
+        if (canSpaceTime <= _leashedTime || _leashedTime <= goodEndTime)
+        {
+            if (pressArrow)
+            {
+                pressCooldown = true;
+                JudgeSpace();
+            }
+            else if (otherArrow1 || otherArrow2 || otherArrow3)
+            {
+                pressCooldown = true;
+                wrongKey = true;
+                JudgeSpace();
+            }
+        }
+        else if (_leashedTime < bpm170 * 0.4)
+        {
+            pressCooldown = true;
+            JudgeSpace();
+        }
+    }
+
+    private void Check(double num)
+    {
+        if (pressCooldown) return;
+
+        if (canSpaceTime <= _leashedTime || _leashedTime <= goodEndTime)
+        {
+            if (player.pressSpace)
+            {
+                pressCooldown = true;
+                JudgeSpace();
+            }
+        }
+        else if (_leashedTime < bpm170 * num)
+        {
+            pressCooldown = true;
+            JudgeSpace();
+        }
     }
 
     /// <summary>
@@ -332,6 +281,22 @@ public class BlockReader : MonoBehaviour
             Debug.Log("ERROR");
         }
     }
+
+    private void JudgeSkip()
+    {
+        missTime = canSpaceTime <= _leashedTime || _leashedTime <= cantSpaceTime;
+
+        if (missTime)
+        {
+            Failure();
+        }
+        else
+        {
+            Success(_excellentObj, 500);
+        }
+        //audio.Play();
+    }
+
     private void Failure()
     {
         //Debug.Log("Miss!");
@@ -352,36 +317,21 @@ public class BlockReader : MonoBehaviour
         _comboSystem.AddCombo(1);
     }
 
-    private void JudgeSkip()
-    {
-        missTime = canSpaceTime <= _elaspedTime || _elaspedTime <= cantSpaceTime;
-
-        if (missTime)
-        {
-            Failure();
-        }
-        else
-        {
-            Success(_excellentObj, 500);
-        }
-        //audio.Play();
-    }
-
     private void JudgeTime()
     {
         if (timerNum == 1)
         {
-            exTime = exStartTime <= _elaspedTime || _elaspedTime <= exEndTime;
-            greatTime = greatStartTime <= _elaspedTime || _elaspedTime <= greatEndTime;
-            goodTime = goodStartTime <= _elaspedTime || _elaspedTime <= goodEndTime;
-            missTime = (goodEndTime < _elaspedTime && _elaspedTime < goodStartTime) || wrongKey;
+            exTime = exStartTime <= _leashedTime || _leashedTime <= exEndTime;
+            greatTime = greatStartTime <= _leashedTime || _leashedTime <= greatEndTime;
+            goodTime = goodStartTime <= _leashedTime || _leashedTime <= goodEndTime;
+            missTime = (goodEndTime < _leashedTime && _leashedTime < goodStartTime) || wrongKey;
         }
         else if (timerNum == 2)
         {
-            exTime = exStartTime <= _elaspedTime && _elaspedTime <= exEndTime;
-            greatTime = greatStartTime <= _elaspedTime && _elaspedTime <= greatEndTime;
-            goodTime = goodStartTime <= _elaspedTime && _elaspedTime <= goodEndTime;
-            missTime = goodEndTime < _elaspedTime || _elaspedTime < goodStartTime || wrongKey;
+            exTime = exStartTime <= _leashedTime && _leashedTime <= exEndTime;
+            greatTime = greatStartTime <= _leashedTime && _leashedTime <= greatEndTime;
+            goodTime = goodStartTime <= _leashedTime && _leashedTime <= goodEndTime;
+            missTime = goodEndTime < _leashedTime || _leashedTime < goodStartTime || wrongKey;
         }
     }
 
@@ -390,7 +340,7 @@ public class BlockReader : MonoBehaviour
     /// </summary>
     public void ConvertLocal(double elaspedTime)
     {
-        _elaspedTime = elaspedTime;
+        _leashedTime = elaspedTime;
         _hit = player.hit;
     }
 
@@ -423,11 +373,11 @@ public class BlockReader : MonoBehaviour
     private void CheckTiming()
     {
         /* ブロックの更新 */
-        if (_elaspedTime >= bufferTime)
+        if (_leashedTime >= bufferTime)
         {
             if (!cooldown)
             {
-                justTime = bpm170 * 0.75 - _elaspedTime;
+                justTime = bpm170 * 0.75 - _leashedTime;
                 Invoke("UpdateBlock", (float)justTime);
                 cooldown = true;
             }
@@ -438,11 +388,11 @@ public class BlockReader : MonoBehaviour
         }
 
         /* TWICEブロックの更新 */
-        if (block == Block.TWICE && twiceSTime <= _elaspedTime && _elaspedTime <= twiceETime)
+        if (block == Block.TWICE && twiceSTime <= _leashedTime && _leashedTime <= twiceETime)
         {
             if (!cooldown2)
             {
-                justTime = bpm170 * 0.25 - _elaspedTime;
+                justTime = bpm170 * 0.25 - _leashedTime;
                 Invoke("UpdateTwice", (float)justTime);
                 cooldown2 = true;
             }
