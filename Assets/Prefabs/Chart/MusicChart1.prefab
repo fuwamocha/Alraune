@@ -4339,7 +4339,7 @@ GameObject:
   - component: {fileID: 4720703355742936639}
   - component: {fileID: 4720703355742936632}
   m_Layer: 0
-  m_Name: Chart1
+  m_Name: MusicChart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
