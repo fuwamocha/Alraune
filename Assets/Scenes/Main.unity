@@ -610,12 +610,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eab1d8cee5e96e47a66229aefb090c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _excellentObj: {fileID: 3186609634614867506, guid: e0b9c31e0fedef641866f7e58e7c9c01, type: 3}
+  _greatObj: {fileID: 831464679582949190, guid: 0a639131a06bb24449cff0d2bfc09737, type: 3}
+  _goodObj: {fileID: 6479418904759888184, guid: 3999afdd38385d74eb216b353e2eba15, type: 3}
+  _missObj: {fileID: 3799967933834877925, guid: 0507693c92beec649a2b3c8006303393, type: 3}
   player: {fileID: 659298062}
+  _comboSystem: {fileID: 700440229}
+  _score: {fileID: 1976879507}
   playerpos: {fileID: 434445289}
-  excellent: {fileID: 3186609634614867506, guid: e0b9c31e0fedef641866f7e58e7c9c01, type: 3}
-  great: {fileID: 831464679582949190, guid: 0a639131a06bb24449cff0d2bfc09737, type: 3}
-  Good: {fileID: 6479418904759888184, guid: 3999afdd38385d74eb216b353e2eba15, type: 3}
-  Miss: {fileID: 3799967933834877925, guid: 0507693c92beec649a2b3c8006303393, type: 3}
 --- !u!4 &502029068
 Transform:
   m_ObjectHideFlags: 0
@@ -2655,7 +2657,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player2Manager: {fileID: 659298062}
-  _enemyManager: {fileID: 1906341145}
 --- !u!1 &2107816538
 GameObject:
   m_ObjectHideFlags: 0

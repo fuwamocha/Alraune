@@ -8,8 +8,13 @@ using UnityEngine;
 /// </summary>
 public class BlockReader : MonoBehaviour
 {
-
+    [SerializeField] private GameObject _excellentObj;
+    [SerializeField] private GameObject _greatObj;
+    [SerializeField] private GameObject _goodObj;
+    [SerializeField] private GameObject _missObj;
     [SerializeField] Player2Manager player = default;
+    [SerializeField] ComboSystem _comboSystem;
+    [SerializeField] Score _score;
 
     private int timerNum;
     private double bpm170 = 120 / 170d; // 関数が必要？
@@ -56,13 +61,11 @@ public class BlockReader : MonoBehaviour
 
     public GameObject playerpos;
 
-    public GameObject excellent;
-    public GameObject great;
-    public GameObject Good;
-    public GameObject Miss;
-
     private void Start()
     {
+        _comboSystem = _comboSystem.GetComponent<ComboSystem>();
+        _score = _score.GetComponent<Score>();
+
         bufferTime = bpm170 * 0.70;
         twiceSTime = bpm170 * 0.15;
         twiceETime = bpm170 * 0.25;
@@ -304,50 +307,49 @@ public class BlockReader : MonoBehaviour
     /// <summary>
     /// スペースのタイミング判定処理
     /// </summary>
+
     private void JudgeSpace()
     {
         JudgeTime();
         if (missTime)
         {
-            //Debug.Log("Miss!");
-            isMiss = true;
-            player.MissAnimation();
-            player.ReduceHP();
-            Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
-            return;
+            Failure();
         }
         else if (exTime)
         {
-            //Debug.Log("Excellent!");
-            Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
+            Success(_excellentObj, 500);
         }
         else if (greatTime)
         {
-            //Debug.Log("Great!");
-            Instantiate(great, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(300);
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
+            Success(_greatObj, 300);
         }
         else if (goodTime)
         {
-            //Debug.Log("Good!");
-            Instantiate(Good, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(100);
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
+            Success(_goodObj, 100);
         }
         else
         {
             Debug.Log("ERROR");
-            return;
         }
+    }
+    private void Failure()
+    {
+        //Debug.Log("Miss!");
+        isMiss = true;
+        player.MissAnimation();
+        player.ReduceHP();
+        Instantiate(_missObj, playerpos.transform.position, Quaternion.identity);
+
+        _comboSystem.ComboCount = 0;
+        _comboSystem.AddCombo(0);
+    }
+
+    private void Success(GameObject timing, int score)
+    {
+        Instantiate(timing, playerpos.transform.position, Quaternion.identity);
+
+        _score.AddScore(score);
+        _comboSystem.AddCombo(1);
     }
 
     private void JudgeSkip()
@@ -356,25 +358,12 @@ public class BlockReader : MonoBehaviour
 
         if (missTime)
         {
-            //Debug.Log("Miss!");
-            isMiss = true;
-            player.MissAnimation();
-            player.ReduceHP();
-            Instantiate(Miss, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().ComboCount = 0;
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(0);
-            return;
+            Failure();
         }
         else
         {
-            //Debug.Log("Excellent!");
-            Instantiate(excellent, playerpos.transform.position, Quaternion.identity);
-
-            GameObject.Find("ScoreText").GetComponent<Score>().AddScore(500);
-            GameObject.Find("ComboText").GetComponent<ComboSystem>().AddCombo(1);
+            Success(_excellentObj, 500);
         }
-
         //audio.Play();
     }
 
