@@ -17,7 +17,6 @@ public class BlockReader : MonoBehaviour
     [SerializeField] ScoreCounter _score;
 
     private int timerNum;
-    private double bpm170 = 120 / 170d; // 関数が必要？
     private double canSpaceTime;
     private double cantSpaceTime;      // 押さないブロック用？
     private double goodStartTime;
@@ -67,9 +66,9 @@ public class BlockReader : MonoBehaviour
         _score = _score.GetComponent<ScoreCounter>();
 
         pressArrows = player.upArrow || player.downArrow || player.leftArrow || player.rightArrow;
-        bufferTime = bpm170 * 0.70;
-        twiceSTime = bpm170 * 0.15;
-        twiceETime = bpm170 * 0.25;
+        bufferTime = Config.StepSecondsPerBeat * 0.70;
+        twiceSTime = Config.StepSecondsPerBeat * 0.15;
+        twiceETime = Config.StepSecondsPerBeat * 0.25;
     }
 
     private void FixedUpdate()
@@ -152,7 +151,7 @@ public class BlockReader : MonoBehaviour
                             JudgeSpace();
                         }
                     }
-                    else if (_leashedTime < bpm170 * 0.75 && !pressCooldown)
+                    else if (_leashedTime < Config.StepSecondsPerBeat * 0.75 && !pressCooldown)
                     {
                         pressCooldown = true;
                         JudgeSpace();
@@ -171,7 +170,7 @@ public class BlockReader : MonoBehaviour
                         JudgeSkip();
                     }
                 }
-                else if (_leashedTime < bpm170 * 0.4 && !pressCooldown)
+                else if (_leashedTime < Config.StepSecondsPerBeat * 0.4 && !pressCooldown)
                 {
                     pressCooldown = true;
                     JudgeSkip();
@@ -227,7 +226,7 @@ public class BlockReader : MonoBehaviour
                 JudgeSpace();
             }
         }
-        else if (_leashedTime < bpm170 * 0.4)
+        else if (_leashedTime < Config.StepSecondsPerBeat * 0.4)
         {
             pressCooldown = true;
             JudgeSpace();
@@ -246,7 +245,7 @@ public class BlockReader : MonoBehaviour
                 JudgeSpace();
             }
         }
-        else if (_leashedTime < bpm170 * num)
+        else if (_leashedTime < Config.StepSecondsPerBeat * num)
         {
             pressCooldown = true;
             JudgeSpace();
@@ -347,27 +346,27 @@ public class BlockReader : MonoBehaviour
     private void NormalTimer()
     {
         timerNum = 1;
-        canSpaceTime = bpm170 * 0.72;
-        cantSpaceTime = bpm170 * 0.22;      // 押さないブロック用？
-        goodStartTime = bpm170 * 0.85;
-        goodEndTime = bpm170 * 0.15;
-        greatStartTime = bpm170 * 0.92;
-        greatEndTime = bpm170 * 0.08;
-        exStartTime = bpm170 * 0.97;
-        exEndTime = bpm170 * 0.03;
+        canSpaceTime = Config.StepSecondsPerBeat * 0.72;
+        cantSpaceTime = Config.StepSecondsPerBeat * 0.22;      // 押さないブロック用？
+        goodStartTime = Config.StepSecondsPerBeat * 0.85;
+        goodEndTime = Config.StepSecondsPerBeat * 0.15;
+        greatStartTime = Config.StepSecondsPerBeat * 0.92;
+        greatEndTime = Config.StepSecondsPerBeat * 0.08;
+        exStartTime = Config.StepSecondsPerBeat * 0.97;
+        exEndTime = Config.StepSecondsPerBeat * 0.03;
     }
 
     private void TwiceTimer()
     {
         timerNum = 2;
-        canSpaceTime = bpm170 * 0.22;
-        cantSpaceTime = bpm170 * 0.72;      // 押さないブロック用？
-        goodStartTime = bpm170 * 0.35;
-        goodEndTime = bpm170 * 0.65;
-        greatStartTime = bpm170 * 0.42;
-        greatEndTime = bpm170 * 0.58;
-        exStartTime = bpm170 * 0.47;
-        exEndTime = bpm170 * 0.53;
+        canSpaceTime = Config.StepSecondsPerBeat * 0.22;
+        cantSpaceTime = Config.StepSecondsPerBeat * 0.72;      // 押さないブロック用？
+        goodStartTime = Config.StepSecondsPerBeat * 0.35;
+        goodEndTime = Config.StepSecondsPerBeat * 0.65;
+        greatStartTime = Config.StepSecondsPerBeat * 0.42;
+        greatEndTime = Config.StepSecondsPerBeat * 0.58;
+        exStartTime = Config.StepSecondsPerBeat * 0.47;
+        exEndTime = Config.StepSecondsPerBeat * 0.53;
     }
 
     private void CheckTiming()
@@ -377,7 +376,7 @@ public class BlockReader : MonoBehaviour
         {
             if (!cooldown)
             {
-                justTime = bpm170 * 0.75 - _leashedTime;
+                justTime = Config.StepSecondsPerBeat * 0.75 - _leashedTime;
                 Invoke("UpdateBlock", (float)justTime);
                 cooldown = true;
             }
@@ -392,7 +391,7 @@ public class BlockReader : MonoBehaviour
         {
             if (!cooldown2)
             {
-                justTime = bpm170 * 0.25 - _leashedTime;
+                justTime = Config.StepSecondsPerBeat * 0.25 - _leashedTime;
                 Invoke("UpdateTwice", (float)justTime);
                 cooldown2 = true;
             }
