@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 曲とリズムの同期を行うクラス
 /// </summary>
-public class RythemManager : MonoBehaviour
+public class RhythmManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] BGM = default;
     [SerializeField] private AudioSource _audioSource;
@@ -13,13 +13,12 @@ public class RythemManager : MonoBehaviour
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
 
-    public double totalTime = 0d;           // トータル経過時間 (sec)
+    public double totalTime { get; private set; }           // トータル経過時間 (sec)
 
     private int count = 0;                  // BGM切り替え用
-    private double elaspedTime;             // 1回毎の経過時間 (sec)
+    public double elaspedTime;             // 1回毎の経過時間 (sec)
     private double bufferTime;              // 緩衝時間 (タイミングの同期用)
-    private double justTime;                // 時間調整用
-    private double bpm170 = 120 / 170d;
+    public double justTime;                // 時間調整用
     private bool cooldown = false;          // 連続実行の防止用
 
 
@@ -31,13 +30,13 @@ public class RythemManager : MonoBehaviour
         _audioSource.clip = BGM[0];
         _audioSource.Play();
 
-        bufferTime = bpm170 * 0.92;
+        bufferTime = Config.StepSecondsPerBeat * 0.92;
     }
 
     private void FixedUpdate()
     {
         totalTime = _audioSource.time;
-        elaspedTime = totalTime % bpm170;
+        elaspedTime = totalTime % Config.StepSecondsPerBeat;
 
         GetRightTiming();
         block.ConvertLocal(elaspedTime);
@@ -53,11 +52,11 @@ public class RythemManager : MonoBehaviour
         {
             if (!cooldown)
             {
-                justTime = bpm170 - elaspedTime;
+                justTime = Config.StepSecondsPerBeat - elaspedTime;
                 Invoke("JustTiming", (float)justTime);
                 cooldown = true;
 
-                aTime = totalTime + (bpm170 - elaspedTime);     // デバッグ用 (曲の経過時間)
+                aTime = totalTime + (Config.StepSecondsPerBeat - elaspedTime);     // デバッグ用 (曲の経過時間)
             }
         }
         else if (cooldown)

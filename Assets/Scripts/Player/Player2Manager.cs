@@ -130,9 +130,9 @@ public class Player2Manager : MonoBehaviour
             missAnim = false;
         }
     }
-    public void RythemAnimation()
+    public void RhythmAnimation()
     {
-        animator.SetTrigger("Rythem");
+        animator.SetTrigger("Rhythm");
     }
 
     public void MissAnimation()

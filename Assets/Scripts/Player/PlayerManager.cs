@@ -22,9 +22,9 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        rb       = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource   = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         audioSource.clip = shan;
     }
 
@@ -37,9 +37,12 @@ public class PlayerManager : MonoBehaviour
 
         // �A�j���[�V�����J��
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
-        if (HitGround() && animator.GetBool("Jump")) {
+        if (HitGround() && animator.GetBool("Jump"))
+        {
             animator.SetBool("Jump", false);
-        } else if (!HitGround() && !animator.GetBool("Jump")) {
+        }
+        else if (!HitGround() && !animator.GetBool("Jump"))
+        {
             animator.SetBool("Jump", true);
         }
 
@@ -54,7 +57,8 @@ public class PlayerManager : MonoBehaviour
     private void FixedUpdate()
     {
         // �v���C���[�̌���
-        if (xSpeed != 0) {
+        if (xSpeed != 0)
+        {
             transform.localScale = new Vector2(xSpeed * 1.25f, 1.25f);
         }
 
@@ -63,23 +67,31 @@ public class PlayerManager : MonoBehaviour
         vector.y = rb.velocity.y;
 
         // �I�[�g�W�����v����
-        if (autoJump) {
-            if (canJump && HitGround()) {
+        if (autoJump)
+        {
+            if (canJump && HitGround())
+            {
                 count++;
                 rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
-            } else if (canJump && !HitGround()) {
+            }
+            else if (canJump && !HitGround())
+            {
                 canJump = false;
                 isJump = true;
             }
 
-            if (isJump && HitGround()) {
+            if (isJump && HitGround())
+            {
                 xSpeed = 0f;
                 isJump = false;
                 autoJump = false;
-                if (count % 4 == 0) {
+                if (count % 4 == 0)
+                {
                     transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
                 }
-            } else if (isJump) {
+            }
+            else if (isJump)
+            {
                 xSpeed = Mathf.Sign(transform.localScale.x);
                 vector.x = xSpeed * 7.6f;
             }
@@ -96,9 +108,9 @@ public class PlayerManager : MonoBehaviour
     }
 
     // �A�j���[�V�����J��
-    public void RythemAnim()
+    public void RhythmAnim()
     {
-        animator.SetTrigger("Rythem");
+        animator.SetTrigger("Rhythm");
     }
 
     public void AutoJump()
