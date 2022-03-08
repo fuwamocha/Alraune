@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
-    [SerializeField] Player2Manager _player2Manager;
+    [SerializeField] PlayerManager _player2Manager;
 
     public int missCount { get; private set; } = 0;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
