@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHpView : MonoBehaviour
 {
-    [SerializeField] private Player2Manager _player2Manager;
+    [SerializeField] private PlayerManager _player2Manager;
     private Text _hpText;
     private void Start()
     {
@@ -16,11 +16,11 @@ public class PlayerHpView : MonoBehaviour
             .Where(x => x >= 0)
             .Subscribe(x =>
             {
-                UpdateHPText(x);
+                DisplayHPText(x);
             });
     }
 
-    private void UpdateHPText(int hp)
+    private void DisplayHPText(int hp)
     {
         _hpText.text = $"{hp:00}";
         Debug.Log($"残りHP: {hp}");

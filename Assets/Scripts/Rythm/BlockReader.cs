@@ -12,7 +12,7 @@ public class BlockReader : MonoBehaviour
     [SerializeField] private GameObject _greatObj;
     [SerializeField] private GameObject _goodObj;
     [SerializeField] private GameObject _missObj;
-    [SerializeField] Player2Manager player = default;
+    [SerializeField] PlayerManager player = default;
     [SerializeField] ComboCounter _combo;
     [SerializeField] ScoreCounter _score;
 

@@ -1,42 +1,119 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの動作に関するクラス
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer = default;
-    [SerializeField] AudioClip shan = default;
+    [SerializeField] private AudioClip _inputAudioClip;
+    [SerializeField] private AudioSource _audioSource;
 
-    private int count = 0;
+    public IReadOnlyReactiveProperty<int> Hp => _hp;
+    public bool noJump = false;     // ジャンプのオン/オフ切り替え用
+
+    public bool pressSpace = false;
+    public bool upArrow = false;
+    public bool downArrow = false;
+    public bool leftArrow = false;
+    public bool rightArrow = false;
+    public RaycastHit2D hit;
+
+
+    private readonly ReactiveProperty<int> _hp = new ReactiveProperty<int>(12);
+    private float xLocal;
     private float xSpeed;
-    private float xScale;
-    private float jumpPower = 950f;
-    private bool isJump = false;
-    private bool canJump = false;
+    private float jumpPower = 750f;
     private bool autoJump = false;
-
+    private bool missAnim = false;
     private Animator animator;
-    private AudioSource audioSource;
     private Rigidbody2D rb;
     private Vector2 vector;
 
     private void Start()
     {
+        _audioSource = _audioSource.GetComponent<AudioSource>();
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = shan;
+
+        _hp.AddTo(this);
     }
 
     private void Update()
     {
-        xSpeed = Input.GetAxisRaw("Horizontal");
-        xScale = Mathf.Sign(transform.localScale.x);
+        PlayerKeyboard();
+        PlayerAnimation();
+    }
 
-        //Debug.DrawLine(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, Color.red);
+    private void FixedUpdate()
+    {
+        /* ショータ君の向き */
+        xLocal = Mathf.Sign(transform.localScale.x);
+        transform.localScale = new Vector2(xLocal * 0.8f, 0.8f);
 
-        // �A�j���[�V�����J��
+        /* 自動ジャンプ処理 */
+        if (autoJump && !noJump)
+        {
+            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
+            xSpeed = 6.33f;
+            autoJump = false;
+        }
+        else if (HitGround())
+        {
+            xSpeed = 0f;
+        }
+
+        /* 移動処理 */
+        vector.x = xSpeed * xLocal;
+        vector.y = rb.velocity.y;
+        rb.velocity = vector;
+    }
+
+
+    /// <summary>
+    /// プレイヤーのキーボード入力処理
+    /// </summary>
+    private void PlayerKeyboard()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            pressSpace = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            upArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            downArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            leftArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            rightArrow = true;
+            _audioSource.PlayOneShot(_inputAudioClip);
+        }
+
+    }
+
+    /// <summary>
+    /// プレイヤーのアニメーション処理
+    /// </summary>
+    private void PlayerAnimation()
+    {
         animator.SetFloat("Speed", Mathf.Abs(xSpeed));
+
         if (HitGround() && animator.GetBool("Jump"))
         {
             animator.SetBool("Jump", false);
@@ -46,81 +123,45 @@ public class PlayerManager : MonoBehaviour
             animator.SetBool("Jump", true);
         }
 
-        /*
-        // �f�o�b�O�p�@�̂�����
-        if (Input.GetKeyDown(KeyCode.U)) {
+        if (missAnim)
+        {
+
             animator.SetTrigger("Miss");
+            missAnim = false;
         }
-        */
     }
-
-    private void FixedUpdate()
-    {
-        // �v���C���[�̌���
-        if (xSpeed != 0)
-        {
-            transform.localScale = new Vector2(xSpeed * 1.25f, 1.25f);
-        }
-
-        // �ړ�����
-        vector.x = xSpeed * 5f;
-        vector.y = rb.velocity.y;
-
-        // �I�[�g�W�����v����
-        if (autoJump)
-        {
-            if (canJump && HitGround())
-            {
-                count++;
-                rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Force);
-            }
-            else if (canJump && !HitGround())
-            {
-                canJump = false;
-                isJump = true;
-            }
-
-            if (isJump && HitGround())
-            {
-                xSpeed = 0f;
-                isJump = false;
-                autoJump = false;
-                if (count % 4 == 0)
-                {
-                    transform.localScale = new Vector2(transform.localScale.x * -1f, 1.25f);
-                }
-            }
-            else if (isJump)
-            {
-                xSpeed = Mathf.Sign(transform.localScale.x);
-                vector.x = xSpeed * 7.6f;
-            }
-        }
-
-        // �ړ�����
-        rb.velocity = vector;
-    }
-
-    // �ڒn����
-    private bool HitGround()
-    {
-        return Physics2D.Linecast(transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.85f, transform.position - (transform.right * 0.18f * xScale) - transform.up * 1.95f, groundLayer);
-    }
-
-    // �A�j���[�V�����J��
-    public void RhythmAnim()
+    public void RhythmAnimation()
     {
         animator.SetTrigger("Rhythm");
     }
 
-    public void AutoJump()
+    public void MissAnimation()
     {
-        canJump = true;
-        autoJump = true;
+        missAnim = true;
     }
 
-    public void Shan()
+    public void ReduceHP()
     {
-        //audioSource.Play();
+        _hp.Value--;
+    }
+
+    /// <summary>
+    /// 接地判定の取得
+    /// </summary>
+    private bool HitGround()
+    {
+        Debug.DrawLine(transform.position - transform.up * 1.15f,   // デバッグ用
+                    　 transform.position - transform.up * 1.30f,
+                       Color.red);
+
+        hit = Physics2D.Linecast(transform.position - transform.up * 1.15f,
+                                 transform.position - transform.up * 1.30f,
+                                 groundLayer);
+        return hit;
+    }
+
+    public void AutoJump()
+    {
+        autoJump = true;
     }
 }

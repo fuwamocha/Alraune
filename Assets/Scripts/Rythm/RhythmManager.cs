@@ -9,7 +9,7 @@ public class RhythmManager : MonoBehaviour
 {
     [SerializeField] AudioClip[] BGM = default;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] Player2Manager player = default;
+    [SerializeField] PlayerManager player = default;
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] BlockReader block = default;
 
