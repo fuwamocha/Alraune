@@ -8,18 +8,12 @@ using UnityEngine;
 /// </summary>
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private InputReflector _inputReflector;
     [SerializeField] LayerMask groundLayer = default;
-    [SerializeField] private AudioClip _inputAudioClip;
-    [SerializeField] private AudioSource _audioSource;
 
     public IReadOnlyReactiveProperty<int> Hp => _hp;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
 
-    public bool pressSpace = false;
-    public bool upArrow = false;
-    public bool downArrow = false;
-    public bool leftArrow = false;
-    public bool rightArrow = false;
     public RaycastHit2D hit;
 
 
@@ -35,8 +29,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        _audioSource = _audioSource.GetComponent<AudioSource>();
-
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -45,7 +37,11 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        PlayerKeyboard();
+        if (_inputReflector.MissHit)
+        {
+            MissAnimation();
+            ReduceHP();
+        }
         PlayerAnimation();
     }
 
@@ -71,40 +67,6 @@ public class PlayerManager : MonoBehaviour
         vector.x = xSpeed * xLocal;
         vector.y = rb.velocity.y;
         rb.velocity = vector;
-    }
-
-
-    /// <summary>
-    /// プレイヤーのキーボード入力処理
-    /// </summary>
-    private void PlayerKeyboard()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            pressSpace = true;
-            _audioSource.PlayOneShot(_inputAudioClip);
-        }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            upArrow = true;
-            _audioSource.PlayOneShot(_inputAudioClip);
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            downArrow = true;
-            _audioSource.PlayOneShot(_inputAudioClip);
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            leftArrow = true;
-            _audioSource.PlayOneShot(_inputAudioClip);
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            rightArrow = true;
-            _audioSource.PlayOneShot(_inputAudioClip);
-        }
-
     }
 
     /// <summary>
@@ -143,6 +105,7 @@ public class PlayerManager : MonoBehaviour
     public void ReduceHP()
     {
         _hp.Value--;
+        _inputReflector.ResetMissFlag();
     }
 
     /// <summary>
