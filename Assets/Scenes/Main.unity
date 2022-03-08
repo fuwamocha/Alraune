@@ -548,6 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b2ba57d29daa944b2dd1329540cfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputAudioClip: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
+  _audioSource: {fileID: 2107816540}
   _blockReader: {fileID: 502029067}
   _input: {fileID: 977291332}
   _excellentObj: {fileID: 3186609634614867506, guid: e0b9c31e0fedef641866f7e58e7c9c01, type: 3}
@@ -973,14 +975,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _inputAudioClip: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
-  _audioSource: {fileID: 2107816540}
   noJump: 0
-  pressSpace: 0
-  upArrow: 0
-  downArrow: 0
-  leftArrow: 0
-  rightArrow: 0
 --- !u!95 &659298063
 Animator:
   serializedVersion: 3
