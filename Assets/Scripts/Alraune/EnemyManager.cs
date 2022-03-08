@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private InputReflector _inputReflector;
     [SerializeField] LayerMask groundLayer = default;
     [SerializeField] PlayerManager _player2Manager;
 
@@ -53,7 +54,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         /* ワープ処理 */
-        if (BlockReader.isMiss)
+        if (_inputReflector.MissHit)
         {
             Warp();
         }
@@ -82,7 +83,7 @@ public class EnemyManager : MonoBehaviour
     public void Warp()
     {
         missCount++;
-        BlockReader.isMiss = false;
+
 
         if (missCount % 3 == 0)
         {

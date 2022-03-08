@@ -11,7 +11,7 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] PlayerManager player = default;
     [SerializeField] EnemyManager enemy = default;
-    [SerializeField] BlockReader block = default;
+    [SerializeField] InputReflector _inputReflector = default;
 
     public double totalTime { get; private set; }           // トータル経過時間 (sec)
 
@@ -39,7 +39,7 @@ public class RhythmManager : MonoBehaviour
         elaspedTime = totalTime % Config.StepSecondsPerBeat;
 
         GetRightTiming();
-        block.ConvertLocal(elaspedTime);
+        _inputReflector.ConvertLocal(elaspedTime);
     }
 
 
