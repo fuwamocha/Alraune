@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class MoveClearScene : MonoBehaviour
 {
     public static bool isClear = false;
-    private string _gameClearSceneName = "GameClear";
     private string _portalTag = "Portal";
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -14,7 +13,7 @@ public class MoveClearScene : MonoBehaviour
         if (other.gameObject.CompareTag(_portalTag))
         {
             isClear = true;
-            SceneManager.LoadScene(_gameClearSceneName);
+            SceneManager.LoadScene(Config.GameStatus.GameClear.ToString());
             return;
         }
     }

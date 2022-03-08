@@ -7,5 +7,10 @@ public class Config
     internal static float SecondsPerBeat = 60 / 170f;
     internal static float StepSecondsPerBeat = SecondsPerBeat * 2;
 
+    internal enum GameStatus
+    {
+        GameClear,
+        GameOver,
+    }
     //TODO:カウントダウンの秒も上のでやったらいい感じにできそう
 }
