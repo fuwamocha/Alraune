@@ -10,11 +10,9 @@ public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private TimingJudger _timingJudger;
     [SerializeField] LayerMask groundLayer = default;
-    [SerializeField] PlayerManager _player2Manager;
 
     public int missCount { get; private set; } = 0;
     public bool noJump = false;     // ジャンプのオン/オフ切り替え用
-    public static bool isNotClear = false;
 
     private int count = 0;
     private float x;
@@ -84,19 +82,12 @@ public class EnemyManager : MonoBehaviour
     {
         missCount++;
 
-
         if (missCount % 3 == 0)
         {
             xSpeed = 0f;
             x = -13.9f + 1.266f * (count + missCount / 3);
             y = -7.6f + 0.76f * (count + missCount / 3);
             transform.position = new Vector2(x, y);
-        }
-
-        if (_player2Manager.Hp.Value <= 0)
-        {
-            isNotClear = true;
-            SceneManager.LoadScene(Config.GameStatus.GameOver.ToString());
         }
     }
 
