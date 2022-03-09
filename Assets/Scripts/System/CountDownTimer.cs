@@ -26,7 +26,7 @@ public class CountDownTimer : MonoBehaviour
     {
         //3秒カウントのストリームを作成
         //PublishでHot変換
-        _countDownObservable = CreateCountDownObservable(3).Publish();
+        _countDownObservable = CreateCountDownObservable(4).Publish();
     }
 
     void Start()
@@ -43,7 +43,7 @@ public class CountDownTimer : MonoBehaviour
     private IObservable<int> CreateCountDownObservable(int CountTime)
     {
         return Observable
-            .Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(1))
+            .Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(Config.StepSecondsPerBeat))
             .Select(x => (int)(CountTime - x))
             .TakeWhile(x => x > 0);
     }

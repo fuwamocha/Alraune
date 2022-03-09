@@ -12,5 +12,4 @@ public class Config
         GameClear,
         GameOver,
     }
-    //TODO:カウントダウンの秒も上のでやったらいい感じにできそう
 }
