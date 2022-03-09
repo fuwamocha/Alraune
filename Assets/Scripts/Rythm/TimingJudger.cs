@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimingJudgementer : MonoBehaviour
+public class TimingJudger : MonoBehaviour
 {
 
     [SerializeField] private NotesJudgementPopper _notesJudgementPopper;

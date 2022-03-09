@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b2ba57d29daa944b2dd1329540cfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timingJudgementer: {fileID: 1777375808}
+  _timingJudger: {fileID: 0}
   _inputAudioClip: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
   _audioSource: {fileID: 2107816540}
   _blockReader: {fileID: 502029067}
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e5f34da1afb2c4295eae24ba69dd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timingJudgementer: {fileID: 1777375808}
+  _timingJudger: {fileID: 1777375808}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -2199,7 +2199,7 @@ GameObject:
   - component: {fileID: 1777375809}
   - component: {fileID: 1777375808}
   m_Layer: 0
-  m_Name: TimingJudgementer
+  m_Name: TimingJudger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2364,7 +2364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2edc6808c5bfa4282ad8e153c80230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timingJudgementer: {fileID: 1777375808}
+  _timingJudger: {fileID: 1777375808}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InputReflector : MonoBehaviour
 {
-    [SerializeField] private TimingJudgementer _timingJudgementer;
+    [SerializeField] private TimingJudger _timingJudger;
     [SerializeField] private AudioClip _inputAudioClip;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] BlockReader _blockReader = default;
@@ -59,7 +59,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressSpace = true;
                     /* pressCooldown = true;
-                    _timingJudgementer.Space(); */
+                    _timingJudger.Space(); */
                 });
 
         _input.UpArrow
@@ -69,7 +69,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressUpArrow = true;
                     /* pressCooldown = true;
-                    _timingJudgementer.Space(); */
+                    _timingJudger.Space(); */
                 });
 
         _input.DownArrow
@@ -79,7 +79,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressDownArrow = true;
                     /* pressCooldown = true;
-                    _timingJudgementer.Space(); */
+                    _timingJudger.Space(); */
                 });
 
         _input.LeftArrow
@@ -89,7 +89,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressLeftArrow = true;
                     /* pressCooldown = true;
-                    _timingJudgementer.Space(); */
+                    _timingJudger.Space(); */
                 });
 
         _input.RightArrow
@@ -99,7 +99,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressRightArrow = true;
                     /* pressCooldown = true;
-                    _timingJudgementer.Space(); */
+                    _timingJudger.Space(); */
                 });
     }
 
@@ -136,13 +136,13 @@ public class InputReflector : MonoBehaviour
                         if (isPressSpace && !pressCooldown)
                         {
                             pressCooldown = true;
-                            _timingJudgementer.Space();
+                            _timingJudger.Space();
                         }
                     }
                     else if (_leashedTime < Config.StepSecondsPerBeat * 0.75 && !pressCooldown)
                     {
                         pressCooldown = true;
-                        _timingJudgementer.Space();
+                        _timingJudger.Space();
                     }
                 }
                 break;
@@ -155,7 +155,7 @@ public class InputReflector : MonoBehaviour
                     if ((isPressSpace || pressArrows) && !pressCooldown)
                     {
                         pressCooldown = true;
-                        _timingJudgementer.Skip();
+                        _timingJudger.Skip();
                     }
                 }
                 else if (_leashedTime < Config.StepSecondsPerBeat * 0.4 && !pressCooldown)
@@ -163,7 +163,7 @@ public class InputReflector : MonoBehaviour
                     isMissTiming = false;
                     pressCooldown = true;
 
-                    _timingJudgementer.Skip();
+                    _timingJudger.Skip();
                 }
                 break;
 
@@ -207,19 +207,19 @@ public class InputReflector : MonoBehaviour
             if (pressArrow)
             {
                 pressCooldown = true;
-                _timingJudgementer.Space();
+                _timingJudger.Space();
             }
             else if (otherArrow1 || otherArrow2 || otherArrow3)
             {
                 pressCooldown = true;
                 wrongKey = true;
-                _timingJudgementer.Space();
+                _timingJudger.Space();
             }
         }
         else if (_leashedTime < Config.StepSecondsPerBeat * 0.4)
         {
             pressCooldown = true;
-            _timingJudgementer.Space();
+            _timingJudger.Space();
         }
     }
 
@@ -232,13 +232,13 @@ public class InputReflector : MonoBehaviour
             if (isPressSpace)
             {
                 pressCooldown = true;
-                _timingJudgementer.Space();
+                _timingJudger.Space();
             }
         }
         else if (_leashedTime < Config.StepSecondsPerBeat * num)
         {
             pressCooldown = true;
-            _timingJudgementer.Space();
+            _timingJudger.Space();
         }
     }
 
