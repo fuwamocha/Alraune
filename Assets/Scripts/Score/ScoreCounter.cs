@@ -1,17 +1,24 @@
+using UniRx;
 using UnityEngine;
 
 public class ScoreCounter : MonoBehaviour
 {
+    [SerializeField] private ClearStatusNotifier _clearStatusNotifier;
     public int currentScore { get; private set; }
 
-    private void Update()
+    private void Start()
     {
-        // ゲーム終了時に現在スコアを保存
-        if (MoveClearScene.isClear || EnemyManager.isNotClear)
-        {
-            PlayerPrefs.SetInt("SCORE", currentScore);
-            PlayerPrefs.Save();
-        }
+        _clearStatusNotifier
+            .ObserveEveryValueChanged(x => x.isGameClear || x.isGameOver)
+            .Where(x => x)
+            .Subscribe(_ => SetScore())
+            .AddTo(this);
+    }
+
+    private void SetScore()
+    {
+        PlayerPrefs.SetInt("SCORE", currentScore);
+        PlayerPrefs.Save();
     }
 
     /// <summary>

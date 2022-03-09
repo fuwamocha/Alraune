@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa168d7b23bab5c4495d44e688a30d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearStatusNotifier: {fileID: 1746584018}
 --- !u!1 &65293774
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b2ba57d29daa944b2dd1329540cfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timingJudger: {fileID: 0}
+  _timingJudger: {fileID: 1777375808}
   _inputAudioClip: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
   _audioSource: {fileID: 2107816540}
   _blockReader: {fileID: 502029067}
@@ -915,10 +916,9 @@ GameObject:
   - component: {fileID: 659298064}
   - component: {fileID: 659298063}
   - component: {fileID: 659298062}
-  - component: {fileID: 659298068}
   - component: {fileID: 659298069}
   m_Layer: 0
-  m_Name: Player2
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1073,18 +1073,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &659298068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659298061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6c6d94218e8d3b4bab289d742f5b50a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &659298069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,7 +1156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669729198}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -3.3, z: 0}
+  m_LocalPosition: {x: 0.09997606, y: -3.3000183, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 659298067}
@@ -1953,6 +1941,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2800748329174334697, guid: f9db832c723398641a2a6bff75240502, type: 3}
+      propertyPath: _playerManager
+      value: 
+      objectReference: {fileID: 659298062}
     - target: {fileID: 4720703355742936633, guid: f9db832c723398641a2a6bff75240502, type: 3}
       propertyPath: m_Name
       value: MusicChart1
@@ -2003,6 +1995,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9db832c723398641a2a6bff75240502, type: 3}
+--- !u!114 &1746584018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2800748329174334697, guid: f9db832c723398641a2a6bff75240502, type: 3}
+  m_PrefabInstance: {fileID: 1746584017}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6c6d94218e8d3b4bab289d742f5b50a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748373972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,6 +2190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a181049f40fa4f249a54cf5edea4b75f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _clearStatusNotifier: {fileID: 1746584018}
   _score: {fileID: 59046535}
 --- !u!1 &1777375807
 GameObject:
@@ -2324,8 +2328,8 @@ GameObject:
   - component: {fileID: 1906341148}
   - component: {fileID: 1906341146}
   - component: {fileID: 1906341147}
-  - component: {fileID: 1906341145}
   - component: {fileID: 1906341144}
+  - component: {fileID: 1906341145}
   m_Layer: 0
   m_Name: Alraune
   m_TagString: Enemy
@@ -2368,7 +2372,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _player2Manager: {fileID: 659298062}
   noJump: 0
 --- !u!61 &1906341146
 BoxCollider2D:
@@ -2764,7 +2767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ec57898c2eef0469e1351455229044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player2Manager: {fileID: 659298062}
+  _playerManager: {fileID: 659298062}
 --- !u!1 &2107816538
 GameObject:
   m_ObjectHideFlags: 0
