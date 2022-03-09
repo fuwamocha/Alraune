@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: cc12e7fa27b60ed44946bc8215751689, type: 3}
     m_FontSize: 60
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 84
@@ -2743,7 +2743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 12
+  m_Text: 00
 --- !u!222 &2035444853
 CanvasRenderer:
   m_ObjectHideFlags: 0
