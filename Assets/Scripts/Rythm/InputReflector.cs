@@ -5,20 +5,11 @@ using UnityEngine;
 
 public class InputReflector : MonoBehaviour
 {
-    public bool MissHit { get; private set; }
-
-
+    [SerializeField] private TimingJudgementer _timingJudgementer;
     [SerializeField] private AudioClip _inputAudioClip;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] BlockReader _blockReader = default;
     [SerializeField] private KeyInputEventProvider _input;
-    [SerializeField] private GameObject _excellentObj;
-    [SerializeField] private GameObject _greatObj;
-    [SerializeField] private GameObject _goodObj;
-    [SerializeField] private GameObject _missObj;
-
-    [SerializeField] ComboCounter _combo;
-    [SerializeField] ScoreCounter _score;
 
     private int timerNum;
     private double canSpaceTime;
@@ -34,10 +25,10 @@ public class InputReflector : MonoBehaviour
     private double twiceSTime;
     private double twiceETime;
     private double justTime;
-    private bool missTime;
-    private bool goodTime;
-    private bool greatTime;
-    private bool exTime;
+    public bool isMissTiming { get; private set; }
+    public bool isGoodTiming { get; private set; }
+    public bool isGreatTiming { get; private set; }
+    public bool isExcellentTiming { get; private set; }
     private bool pressCooldown = true;
     private bool wrongKey = false;
     private bool pressArrows;
@@ -50,15 +41,11 @@ public class InputReflector : MonoBehaviour
     private bool isPressLeftArrow;
     private bool isPressRightArrow;
 
-
-    public GameObject playerpos;
     private void Start()
     {
         _audioSource = _audioSource.GetComponent<AudioSource>();
         _input = _input.GetComponent<KeyInputEventProvider>();
 
-        _combo = _combo.GetComponent<ComboCounter>();
-        _score = _score.GetComponent<ScoreCounter>();
 
         pressArrows = isPressUpArrow || isPressDownArrow || isPressLeftArrow || isPressRightArrow;
         bufferTime = Config.StepSecondsPerBeat * 0.70;
@@ -72,7 +59,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressSpace = true;
                     /* pressCooldown = true;
-                    JudgeSpace(); */
+                    _timingJudgementer.Space(); */
                 });
 
         _input.UpArrow
@@ -82,7 +69,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressUpArrow = true;
                     /* pressCooldown = true;
-                    JudgeSpace(); */
+                    _timingJudgementer.Space(); */
                 });
 
         _input.DownArrow
@@ -92,7 +79,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressDownArrow = true;
                     /* pressCooldown = true;
-                    JudgeSpace(); */
+                    _timingJudgementer.Space(); */
                 });
 
         _input.LeftArrow
@@ -102,7 +89,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressLeftArrow = true;
                     /* pressCooldown = true;
-                    JudgeSpace(); */
+                    _timingJudgementer.Space(); */
                 });
 
         _input.RightArrow
@@ -112,7 +99,7 @@ public class InputReflector : MonoBehaviour
                     _audioSource.PlayOneShot(_inputAudioClip);
                     isPressRightArrow = true;
                     /* pressCooldown = true;
-                    JudgeSpace(); */
+                    _timingJudgementer.Space(); */
                 });
     }
 
@@ -149,13 +136,13 @@ public class InputReflector : MonoBehaviour
                         if (isPressSpace && !pressCooldown)
                         {
                             pressCooldown = true;
-                            JudgeSpace();
+                            _timingJudgementer.Space();
                         }
                     }
                     else if (_leashedTime < Config.StepSecondsPerBeat * 0.75 && !pressCooldown)
                     {
                         pressCooldown = true;
-                        JudgeSpace();
+                        _timingJudgementer.Space();
                     }
                 }
                 break;
@@ -164,17 +151,19 @@ public class InputReflector : MonoBehaviour
 
                 if (canSpaceTime <= _leashedTime || _leashedTime <= cantSpaceTime)
                 {
-
+                    isMissTiming = true;
                     if ((isPressSpace || pressArrows) && !pressCooldown)
                     {
                         pressCooldown = true;
-                        JudgeSkip();
+                        _timingJudgementer.Skip();
                     }
                 }
                 else if (_leashedTime < Config.StepSecondsPerBeat * 0.4 && !pressCooldown)
                 {
+                    isMissTiming = false;
                     pressCooldown = true;
-                    JudgeSkip();
+
+                    _timingJudgementer.Skip();
                 }
                 break;
 
@@ -218,19 +207,19 @@ public class InputReflector : MonoBehaviour
             if (pressArrow)
             {
                 pressCooldown = true;
-                JudgeSpace();
+                _timingJudgementer.Space();
             }
             else if (otherArrow1 || otherArrow2 || otherArrow3)
             {
                 pressCooldown = true;
                 wrongKey = true;
-                JudgeSpace();
+                _timingJudgementer.Space();
             }
         }
         else if (_leashedTime < Config.StepSecondsPerBeat * 0.4)
         {
             pressCooldown = true;
-            JudgeSpace();
+            _timingJudgementer.Space();
         }
     }
 
@@ -243,98 +232,32 @@ public class InputReflector : MonoBehaviour
             if (isPressSpace)
             {
                 pressCooldown = true;
-                JudgeSpace();
+                _timingJudgementer.Space();
             }
         }
         else if (_leashedTime < Config.StepSecondsPerBeat * num)
         {
             pressCooldown = true;
-            JudgeSpace();
+            _timingJudgementer.Space();
         }
     }
 
-    /// <summary>
-    /// スペースのタイミング判定処理
-    /// </summary>
 
-    private void JudgeSpace()
-    {
-        JudgeTime();
-        if (missTime)
-        {
-            Failure();
-        }
-        else if (exTime)
-        {
-            Success(_excellentObj, 500);
-        }
-        else if (greatTime)
-        {
-            Success(_greatObj, 300);
-        }
-        else if (goodTime)
-        {
-            Success(_goodObj, 100);
-        }
-        else
-        {
-            Debug.Log("ERROR");
-        }
-    }
-
-    private void JudgeSkip()
-    {
-        missTime = canSpaceTime <= _leashedTime || _leashedTime <= cantSpaceTime;
-
-        if (missTime)
-        {
-            Failure();
-        }
-        else
-        {
-            Success(_excellentObj, 500);
-        }
-        //audio.Play();
-    }
-
-    private void Failure()
-    {
-        //Debug.Log("Miss!");
-        MissHit = true;
-
-        Instantiate(_missObj, playerpos.transform.position, Quaternion.identity);
-
-        _combo.ResetCombo();
-        _combo.AddCombo(0);
-    }
-    public void ResetMissFlag()
-    {
-        MissHit = false;
-    }
-
-    private void Success(GameObject timing, int score)
-    {
-        Instantiate(timing, playerpos.transform.position, Quaternion.identity);
-
-        _score.AddScore(score);
-        _combo.AddCombo(1);
-    }
-
-    private void JudgeTime()
+    public void JudgeTime()
     {
         if (timerNum == 1)
         {
-            exTime = exStartTime <= _leashedTime || _leashedTime <= exEndTime;
-            greatTime = greatStartTime <= _leashedTime || _leashedTime <= greatEndTime;
-            goodTime = goodStartTime <= _leashedTime || _leashedTime <= goodEndTime;
-            missTime = (goodEndTime < _leashedTime && _leashedTime < goodStartTime) || wrongKey;
+            isExcellentTiming = exStartTime <= _leashedTime || _leashedTime <= exEndTime;
+            isGreatTiming = greatStartTime <= _leashedTime || _leashedTime <= greatEndTime;
+            isGoodTiming = goodStartTime <= _leashedTime || _leashedTime <= goodEndTime;
+            isMissTiming = (goodEndTime < _leashedTime && _leashedTime < goodStartTime) || wrongKey;
         }
         else if (timerNum == 2)
         {
-            exTime = exStartTime <= _leashedTime && _leashedTime <= exEndTime;
-            greatTime = greatStartTime <= _leashedTime && _leashedTime <= greatEndTime;
-            goodTime = goodStartTime <= _leashedTime && _leashedTime <= goodEndTime;
-            missTime = goodEndTime < _leashedTime || _leashedTime < goodStartTime || wrongKey;
+            isExcellentTiming = exStartTime <= _leashedTime && _leashedTime <= exEndTime;
+            isGreatTiming = greatStartTime <= _leashedTime && _leashedTime <= greatEndTime;
+            isGoodTiming = goodStartTime <= _leashedTime && _leashedTime <= goodEndTime;
+            isMissTiming = goodEndTime < _leashedTime || _leashedTime < goodStartTime || wrongKey;
         }
     }
 

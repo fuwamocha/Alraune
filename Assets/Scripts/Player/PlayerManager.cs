@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private InputReflector _inputReflector;
+    [SerializeField] private TimingJudgementer _timingJudgementer;
     [SerializeField] LayerMask groundLayer = default;
 
     public IReadOnlyReactiveProperty<int> Hp => _hp;
@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (_inputReflector.MissHit)
+        if (_timingJudgementer.MissHit)
         {
             MissAnimation();
             ReduceHP();
@@ -105,7 +105,7 @@ public class PlayerManager : MonoBehaviour
     public void ReduceHP()
     {
         _hp.Value--;
-        _inputReflector.ResetMissFlag();
+        _timingJudgementer.ResetMissFlag();
     }
 
     /// <summary>

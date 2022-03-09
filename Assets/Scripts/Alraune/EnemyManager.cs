@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private InputReflector _inputReflector;
+    [SerializeField] private TimingJudgementer _timingJudgementer;
     [SerializeField] LayerMask groundLayer = default;
     [SerializeField] PlayerManager _player2Manager;
 
@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         /* ワープ処理 */
-        if (_inputReflector.MissHit)
+        if (_timingJudgementer.MissHit)
         {
             Warp();
         }
