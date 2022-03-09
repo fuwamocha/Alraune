@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerHpView : MonoBehaviour
 {
-    [SerializeField] private PlayerManager _player2Manager;
+    [SerializeField] private PlayerManager _playerManager;
     private Text _hpText;
     private void Start()
     {
@@ -12,7 +12,7 @@ public class PlayerHpView : MonoBehaviour
         _hpText = this.GetComponent<Text>();
 
         // HPが減ったらテキスト更新
-        _player2Manager.Hp
+        _playerManager.Hp
             .Where(x => x >= 0)
             .Subscribe(x =>
             {
