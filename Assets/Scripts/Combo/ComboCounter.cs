@@ -7,11 +7,6 @@ public class ComboCounter : MonoBehaviour
     public int currentComboCount { get; private set; }
     public int maxComboCount { get; private set; }
 
-    void Start()
-    {
-        _score = _score.GetComponent<ScoreCounter>();
-    }
-
     public void Update()
     {
         if (currentComboCount >= maxComboCount)

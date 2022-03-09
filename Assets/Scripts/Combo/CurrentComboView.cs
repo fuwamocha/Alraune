@@ -8,7 +8,6 @@ public class CurrentComboView : MonoBehaviour
 
     private void Start()
     {
-        _combo = _combo.GetComponent<ComboCounter>();
         _currentComboText = this.GetComponent<Text>();
     }
 
