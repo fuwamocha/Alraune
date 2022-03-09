@@ -548,17 +548,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4b2ba57d29daa944b2dd1329540cfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timingJudgementer: {fileID: 1777375808}
   _inputAudioClip: {fileID: 8300000, guid: c68ebd63605c5a544bb6087271688f67, type: 3}
   _audioSource: {fileID: 2107816540}
   _blockReader: {fileID: 502029067}
   _input: {fileID: 977291332}
-  _excellentObj: {fileID: 3186609634614867506, guid: e0b9c31e0fedef641866f7e58e7c9c01, type: 3}
-  _greatObj: {fileID: 831464679582949190, guid: 0a639131a06bb24449cff0d2bfc09737, type: 3}
-  _goodObj: {fileID: 6479418904759888184, guid: 3999afdd38385d74eb216b353e2eba15, type: 3}
-  _missObj: {fileID: 3799967933834877925, guid: 0507693c92beec649a2b3c8006303393, type: 3}
-  _combo: {fileID: 1757144377}
-  _score: {fileID: 59046535}
-  playerpos: {fileID: 434445289}
 --- !u!4 &452206244
 Transform:
   m_ObjectHideFlags: 0
@@ -952,6 +946,7 @@ GameObject:
   - component: {fileID: 659298063}
   - component: {fileID: 659298062}
   - component: {fileID: 659298068}
+  - component: {fileID: 659298069}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -971,7 +966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e5f34da1afb2c4295eae24ba69dd35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputReflector: {fileID: 452206243}
+  _timingJudgementer: {fileID: 1777375808}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1122,6 +1117,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c6d94218e8d3b4bab289d742f5b50a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &659298069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659298061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c6899669f7b5d24a82ad72a58be1284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _combo: {fileID: 1757144377}
+  _score: {fileID: 59046535}
 --- !u!1 &659693237
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,6 +2250,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _score: {fileID: 59046535}
+--- !u!1 &1777375807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1777375809}
+  - component: {fileID: 1777375808}
+  m_Layer: 0
+  m_Name: TimingJudgementer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1777375808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777375807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7223a836699a20547ac3e4b7e4223e98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _notesJudgementPopper: {fileID: 659298069}
+  _inputReflector: {fileID: 452206243}
+  _excellentObj: {fileID: 3186609634614867506, guid: e0b9c31e0fedef641866f7e58e7c9c01, type: 3}
+  _greatObj: {fileID: 831464679582949190, guid: 0a639131a06bb24449cff0d2bfc09737, type: 3}
+  _goodObj: {fileID: 6479418904759888184, guid: 3999afdd38385d74eb216b353e2eba15, type: 3}
+  _missObj: {fileID: 3799967933834877925, guid: 0507693c92beec649a2b3c8006303393, type: 3}
+--- !u!4 &1777375809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777375807}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.6349745, y: -4.606043, z: -2.9892771}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1813698292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2368,7 +2426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2edc6808c5bfa4282ad8e153c80230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputReflector: {fileID: 452206243}
+  _timingJudgementer: {fileID: 1777375808}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
