@@ -12,19 +12,19 @@ public class InputReflector : MonoBehaviour
     [SerializeField] private KeyInputEventProvider _input;
 
     private int timerNum;
-    private double canSpaceTime;
-    private double cantSpaceTime;      // 押さないブロック用？
-    private double goodStartTime;
-    private double goodEndTime;
-    private double greatStartTime;
-    private double greatEndTime;
-    private double exStartTime;
-    private double exEndTime;
-    private double _leashedTime = 0d;
-    private double bufferTime;
-    private double twiceSTime;
-    private double twiceETime;
-    private double justTime;
+    private float canSpaceTime;
+    private float cantSpaceTime;      // 押さないブロック用？
+    private float goodStartTime;
+    private float goodEndTime;
+    private float greatStartTime;
+    private float greatEndTime;
+    private float exStartTime;
+    private float exEndTime;
+    private float _leashedTime = 0f;
+    private float bufferTime;
+    private float twiceSTime;
+    private float twiceETime;
+    private float justTime;
     public bool isMissTiming { get; private set; }
     public bool isGoodTiming { get; private set; }
     public bool isGreatTiming { get; private set; }
@@ -48,9 +48,9 @@ public class InputReflector : MonoBehaviour
 
 
         pressArrows = isPressUpArrow || isPressDownArrow || isPressLeftArrow || isPressRightArrow;
-        bufferTime = Config.StepSecondsPerBeat * 0.70;
-        twiceSTime = Config.StepSecondsPerBeat * 0.15;
-        twiceETime = Config.StepSecondsPerBeat * 0.25;
+        bufferTime = Config.StepSecondsPerBeat * 0.70f;
+        twiceSTime = Config.StepSecondsPerBeat * 0.15f;
+        twiceETime = Config.StepSecondsPerBeat * 0.25f;
 
         _input.Space
                 .Where(_ => !pressCooldown)
@@ -120,14 +120,14 @@ public class InputReflector : MonoBehaviour
         {
             case BlockReader.Block.NORMAL:
 
-                Check(0.4);
+                Check(0.4f);
                 break;
 
             case BlockReader.Block.TWICE:
 
                 if (timerNum == 1)
                 {
-                    Check(0.25);
+                    Check(0.25f);
                 }
                 else if (timerNum == 2)
                 {
@@ -139,7 +139,7 @@ public class InputReflector : MonoBehaviour
                             _timingJudger.Space();
                         }
                     }
-                    else if (_leashedTime < Config.StepSecondsPerBeat * 0.75 && !pressCooldown)
+                    else if (_leashedTime < Config.StepSecondsPerBeat * 0.75f && !pressCooldown)
                     {
                         pressCooldown = true;
                         _timingJudger.Space();
@@ -158,7 +158,7 @@ public class InputReflector : MonoBehaviour
                         _timingJudger.Skip();
                     }
                 }
-                else if (_leashedTime < Config.StepSecondsPerBeat * 0.4 && !pressCooldown)
+                else if (_leashedTime < Config.StepSecondsPerBeat * 0.4f && !pressCooldown)
                 {
                     isMissTiming = false;
                     pressCooldown = true;
@@ -216,14 +216,14 @@ public class InputReflector : MonoBehaviour
                 _timingJudger.Space();
             }
         }
-        else if (_leashedTime < Config.StepSecondsPerBeat * 0.4)
+        else if (_leashedTime < Config.StepSecondsPerBeat * 0.4f)
         {
             pressCooldown = true;
             _timingJudger.Space();
         }
     }
 
-    private void Check(double num)
+    private void Check(float num)
     {
         if (pressCooldown) return;
 
@@ -265,27 +265,27 @@ public class InputReflector : MonoBehaviour
     private void NormalTimer()
     {
         timerNum = 1;
-        canSpaceTime = Config.StepSecondsPerBeat * 0.72;
-        cantSpaceTime = Config.StepSecondsPerBeat * 0.22;      // 押さないブロック用？
-        goodStartTime = Config.StepSecondsPerBeat * 0.85;
-        goodEndTime = Config.StepSecondsPerBeat * 0.15;
-        greatStartTime = Config.StepSecondsPerBeat * 0.92;
-        greatEndTime = Config.StepSecondsPerBeat * 0.08;
-        exStartTime = Config.StepSecondsPerBeat * 0.97;
-        exEndTime = Config.StepSecondsPerBeat * 0.03;
+        canSpaceTime = Config.StepSecondsPerBeat * 0.72f;
+        cantSpaceTime = Config.StepSecondsPerBeat * 0.22f;      // 押さないブロック用？
+        goodStartTime = Config.StepSecondsPerBeat * 0.85f;
+        goodEndTime = Config.StepSecondsPerBeat * 0.15f;
+        greatStartTime = Config.StepSecondsPerBeat * 0.92f;
+        greatEndTime = Config.StepSecondsPerBeat * 0.08f;
+        exStartTime = Config.StepSecondsPerBeat * 0.97f;
+        exEndTime = Config.StepSecondsPerBeat * 0.03f;
     }
 
     private void TwiceTimer()
     {
         timerNum = 2;
-        canSpaceTime = Config.StepSecondsPerBeat * 0.22;
-        cantSpaceTime = Config.StepSecondsPerBeat * 0.72;      // 押さないブロック用？
-        goodStartTime = Config.StepSecondsPerBeat * 0.35;
-        goodEndTime = Config.StepSecondsPerBeat * 0.65;
-        greatStartTime = Config.StepSecondsPerBeat * 0.42;
-        greatEndTime = Config.StepSecondsPerBeat * 0.58;
-        exStartTime = Config.StepSecondsPerBeat * 0.47;
-        exEndTime = Config.StepSecondsPerBeat * 0.53;
+        canSpaceTime = Config.StepSecondsPerBeat * 0.22f;
+        cantSpaceTime = Config.StepSecondsPerBeat * 0.72f;      // 押さないブロック用？
+        goodStartTime = Config.StepSecondsPerBeat * 0.35f;
+        goodEndTime = Config.StepSecondsPerBeat * 0.65f;
+        greatStartTime = Config.StepSecondsPerBeat * 0.42f;
+        greatEndTime = Config.StepSecondsPerBeat * 0.58f;
+        exStartTime = Config.StepSecondsPerBeat * 0.47f;
+        exEndTime = Config.StepSecondsPerBeat * 0.53f;
     }
 
     private void CheckTiming()
@@ -295,7 +295,7 @@ public class InputReflector : MonoBehaviour
         {
             if (!cooldown)
             {
-                justTime = Config.StepSecondsPerBeat * 0.75 - _leashedTime;
+                justTime = Config.StepSecondsPerBeat * 0.75f - _leashedTime;
                 Invoke("UpdateBlock", (float)justTime);
                 cooldown = true;
             }
@@ -310,7 +310,7 @@ public class InputReflector : MonoBehaviour
         {
             if (!cooldown2)
             {
-                justTime = Config.StepSecondsPerBeat * 0.25 - _leashedTime;
+                justTime = Config.StepSecondsPerBeat * 0.25f - _leashedTime;
                 Invoke("UpdateTwice", (float)justTime);
                 cooldown2 = true;
             }
@@ -325,9 +325,9 @@ public class InputReflector : MonoBehaviour
     /// <summary>
     /// BlockReaderクラスで扱えるローカル変数に変換
     /// </summary>
-    public void ConvertLocal(double elaspedTime)
+    public void ConvertLocal(float elapsedTime)
     {
-        _leashedTime = elaspedTime;
+        _leashedTime = elapsedTime;
 
     }
     private void UpdateBlock()

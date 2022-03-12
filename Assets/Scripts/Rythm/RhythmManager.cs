@@ -13,16 +13,16 @@ public class RhythmManager : MonoBehaviour
     [SerializeField] EnemyManager enemy = default;
     [SerializeField] InputReflector _inputReflector = default;
 
-    public double totalTime { get; private set; }           // トータル経過時間 (sec)
+    public float totalTime { get; private set; }           // トータル経過時間 (sec)
 
     private int count = 0;                  // BGM切り替え用
-    public double elaspedTime;             // 1回毎の経過時間 (sec)
-    private double bufferTime;              // 緩衝時間 (タイミングの同期用)
-    public double justTime;                // 時間調整用
+    public float elapsedTime { get; private set; }             // 1回毎の経過時間 (sec)
+    private float bufferTime;              // 緩衝時間 (タイミングの同期用)
+    public float justTime;                // 時間調整用
     private bool cooldown = false;          // 連続実行の防止用
 
 
-    public double aTime;         // デバッグ用
+    public float aTime;         // デバッグ用
 
     private void Start()
     {
@@ -30,16 +30,16 @@ public class RhythmManager : MonoBehaviour
         _audioSource.clip = BGM[0];
         _audioSource.Play();
 
-        bufferTime = Config.StepSecondsPerBeat * 0.92;
+        bufferTime = Config.StepSecondsPerBeat * 0.92f;
     }
 
     private void FixedUpdate()
     {
         totalTime = _audioSource.time;
-        elaspedTime = totalTime % Config.StepSecondsPerBeat;
+        elapsedTime = totalTime % Config.StepSecondsPerBeat;
 
         GetRightTiming();
-        _inputReflector.ConvertLocal(elaspedTime);
+        _inputReflector.ConvertLocal(elapsedTime);
     }
 
 
@@ -48,15 +48,15 @@ public class RhythmManager : MonoBehaviour
     /// </summary>
     private void GetRightTiming()
     {
-        if (elaspedTime >= bufferTime)
+        if (elapsedTime >= bufferTime)
         {
             if (!cooldown)
             {
-                justTime = Config.StepSecondsPerBeat - elaspedTime;
+                justTime = Config.StepSecondsPerBeat - elapsedTime;
                 Invoke("JustTiming", (float)justTime);
                 cooldown = true;
 
-                aTime = totalTime + (Config.StepSecondsPerBeat - elaspedTime);     // デバッグ用 (曲の経過時間)
+                aTime = totalTime + (Config.StepSecondsPerBeat - elapsedTime);     // デバッグ用 (曲の経過時間)
             }
         }
         else if (cooldown)
