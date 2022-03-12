@@ -10,6 +10,7 @@ public class KeyInputEventProvider : MonoBehaviour
     public IReadOnlyReactiveProperty<bool> LeftArrow => _leftArrow;
     public IReadOnlyReactiveProperty<bool> RightArrow => _rightArrow;
     public IReadOnlyReactiveProperty<bool> CrossArrows => _crossArrows;
+    public IReadOnlyReactiveProperty<bool> AnyKey => _anyKey;
 
     private readonly ReactiveProperty<bool> _space = new ReactiveProperty<bool>();
     private readonly ReactiveProperty<bool> _upArrow = new ReactiveProperty<bool>();
@@ -17,6 +18,7 @@ public class KeyInputEventProvider : MonoBehaviour
     private readonly ReactiveProperty<bool> _leftArrow = new ReactiveProperty<bool>();
     private readonly ReactiveProperty<bool> _rightArrow = new ReactiveProperty<bool>();
     private readonly ReactiveProperty<bool> _crossArrows = new ReactiveProperty<bool>();
+    private readonly ReactiveProperty<bool> _anyKey = new ReactiveProperty<bool>();
 
     private void Start()
     {
@@ -27,6 +29,7 @@ public class KeyInputEventProvider : MonoBehaviour
         _leftArrow.AddTo(this);
         _rightArrow.AddTo(this);
         _crossArrows.AddTo(this);
+        _anyKey.AddTo(this);
     }
 
     public void Update()
@@ -38,9 +41,16 @@ public class KeyInputEventProvider : MonoBehaviour
         _rightArrow.Value = Input.GetKeyDown(KeyCode.RightArrow);
 
         _crossArrows.Value = false;
+        _anyKey.Value = false;
+
         if (_upArrow.Value || _downArrow.Value || _leftArrow.Value || _rightArrow.Value)
         {
             _crossArrows.Value = true;
+        }
+
+        if (_space.Value || _crossArrows.Value)
+        {
+            _anyKey.Value = true;
         }
     }
 }
