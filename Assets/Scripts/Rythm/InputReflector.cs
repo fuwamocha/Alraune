@@ -52,11 +52,18 @@ public class InputReflector : MonoBehaviour
         twiceSTime = Config.StepSecondsPerBeat * 0.15f;
         twiceETime = Config.StepSecondsPerBeat * 0.25f;
 
+        _input.AnyKey
+                .Subscribe(x =>
+                {
+                    _audioSource.PlayOneShot(_inputAudioClip);
+                    /* pressCooldown = true;
+                    _timingJudger.Space(); */
+                });
+
         _input.Space
                 .Where(_ => !pressCooldown)
                 .Subscribe(x =>
                 {
-                    _audioSource.PlayOneShot(_inputAudioClip);
                     isPressSpace = true;
                     /* pressCooldown = true;
                     _timingJudger.Space(); */
@@ -66,7 +73,6 @@ public class InputReflector : MonoBehaviour
                 .Where(_ => !pressCooldown)
                 .Subscribe(x =>
                 {
-                    _audioSource.PlayOneShot(_inputAudioClip);
                     isPressUpArrow = true;
                     /* pressCooldown = true;
                     _timingJudger.Space(); */
@@ -76,7 +82,6 @@ public class InputReflector : MonoBehaviour
                 .Where(_ => !pressCooldown)
                 .Subscribe(x =>
                 {
-                    _audioSource.PlayOneShot(_inputAudioClip);
                     isPressDownArrow = true;
                     /* pressCooldown = true;
                     _timingJudger.Space(); */
@@ -86,7 +91,6 @@ public class InputReflector : MonoBehaviour
                 .Where(_ => !pressCooldown)
                 .Subscribe(x =>
                 {
-                    _audioSource.PlayOneShot(_inputAudioClip);
                     isPressLeftArrow = true;
                     /* pressCooldown = true;
                     _timingJudger.Space(); */
@@ -96,7 +100,6 @@ public class InputReflector : MonoBehaviour
                 .Where(_ => !pressCooldown)
                 .Subscribe(x =>
                 {
-                    _audioSource.PlayOneShot(_inputAudioClip);
                     isPressRightArrow = true;
                     /* pressCooldown = true;
                     _timingJudger.Space(); */
